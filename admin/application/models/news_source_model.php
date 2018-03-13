@@ -51,7 +51,14 @@ class News_source_model extends CI_Model {
             return true;
         }
     }
-
+  public function activelists($table) {
+        $this->db->from($table);
+        $this->db->order_by("id", "DESC");
+        $this->db->order_by("status",1);
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
     public function lists($table) {
         $this->db->from($table);
         $this->db->order_by("id", "DESC");

@@ -47,6 +47,7 @@ $scyllrop = $naevjon - 1; ?><!DOCTYPE html>
 
         <!-- Custom Fonts -->
         <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://select2.github.io/select2/select2-3.5.1/select2.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

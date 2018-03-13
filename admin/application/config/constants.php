@@ -41,7 +41,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 /* Location: ./application/config/constants.php */
 
 
-define('PHYSICAL_PATH',		$_SERVER['DOCUMENT_ROOT'].'/lab4/credit_monk/admin/');
+define('PHYSICAL_PATH',		$_SERVER['DOCUMENT_ROOT'].'/admin/');
 define('PHYSICAL_PATH_FRONT',		$_SERVER['DOCUMENT_ROOT'].'/lab4/credit_monk/');
 define('FRONT_SITE_PATH',		'http://esolz.co.in/lab4/credit_monk/');
 
