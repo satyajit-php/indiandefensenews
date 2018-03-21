@@ -30,50 +30,78 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Added by <span style="color: red;">*</span>:</label>
-                                    <input class="form-control need" id="added_by" name="added_by" label="Added by" required>
+                                    <input class="form-control need" id="added_by" name="added_by" value="admin" label="Added by" required>
 
                                 </div>
-                                <div class="form-group">
-                                    <label>Tag <span style="color: red;">*</span>:</label>
-
-                                    <?php
-                                    $all_tag = $this->blog_tag_model->get_all_tag();
-                                    ?>
-                                    <select name="blog_category" class="select2" style="width: 100%;" label="Tag" required>
-                                        <option value="">Select Tag</option>
-                                        <?php
-                                        foreach ($all_tag as $get_all) {
-                                            ?>
-                                            <option value="<?php echo $get_all->id; ?>"><?php echo $get_all->tag_name; ?></option>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Tag <span style="color: red;">*</span>:</label>
 
                                             <?php
-                                        }
-                                        ?>
-                                    </select>
+                                            $all_tag = $this->blog_tag_model->get_all_tag();
+                                            ?>
+                                            <select name="blog_category" class="select2" id="blog_category" style="width: 100%;" label="Tag" required>
+                                                <option value="">Select Tag</option>
+                                                <?php
+                                                foreach ($all_tag as $get_all) {
+                                                    ?>
+                                                    <option value="<?php echo $get_all->id; ?>"><?php echo $get_all->tag_name; ?></option>
+
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4" style="padding-top: 23px;">
+                                        <a class="btn btn-primary btn-sm newtagcover" href="javascript:void(0)">ADD NEW TAG</a>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="newtag_cover" style="display: none;">
+                                    <label>New Tag <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need"  name="new_tag" label="New Tag">
+
 
                                 </div>
-                                <div class="form-group">
-                                    <label>News Source <span style="color: red;">*</span>:</label>
-
-                                    <?php
-                                    $all_news_source = $this->news_source_model->activelists("news_source");
-                                    ?>
-                                    <select name="blog_source" class="select2" style="width: 100%;" label="Tag" required>
-                                        <option value="">Select Source</option>
-                                        <?php
-                                        foreach ($all_news_source as $get_all) {
-                                            ?>
-                                            <option value="<?php echo $get_all->id; ?>"><?php echo $get_all->short_name; ?></option>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>News Source <span style="color: red;">*</span>:</label>
 
                                             <?php
-                                        }
-                                        ?>
-                                    </select>
+                                            $all_news_source = $this->news_source_model->activelists("news_source");
+                                            ?>
+                                            <select name="blog_source" id="blog_source" class="select2" style="width: 100%;" label="Tag" required>
+                                                <option value="">Select Source</option>
+                                                <?php
+                                                foreach ($all_news_source as $get_all) {
+                                                    ?>
+                                                    <option value="<?php echo $get_all->id; ?>"><?php echo $get_all->short_name; ?></option>
+
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="padding-top: 23px;">
+                                        <a class="btn btn-primary btn-sm newsourcer" href="javascript:void(0)">ADD NEW SOURCE</a>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="newsource_cover" style="display: none;">
+                                    <label>New News Source <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need"  name="new_source" label="New Source">
+
 
                                 </div>
+
                                 <div class="form-group">
                                     <label><span style="color: red;">*</span> Image :</label>
-                                    <input type="file" class="form-control need" id="attachment_file" name="attachment_file" label="Attachment" style= "margin-top: 15px;" required>
+                                    <input type="file" class="form-control need file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" required>
 
 
                                 </div>
@@ -133,5 +161,19 @@
     {
         window.location.href = "<?php echo base_url(); ?>index.php/blog_cont";
     }
+    $(document).ready(function () {
+
+        $(".newtagcover").click(function () {
+
+            $("#newtag_cover").css('display', 'block');
+            $('#blog_category').prop('required',false);
+
+        })
+        $(".newsourcer").click(function () {
+            $("#newsource_cover").css('display', 'block');
+            $('#blog_source').prop('required',false);
+
+        })
+    });
 </script>
 <!------------validate form------------->

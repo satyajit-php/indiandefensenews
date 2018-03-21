@@ -82,13 +82,13 @@
                                     if (isset($blog_data[0]->images) && $blog_data[0]->images != '') {
                                         ?>
                                         <img alt="Your uploaded image" src="<?php echo base_url() . 'uploaded_image/normal/' . $blog_data[0]->images; ?>"  height="100" width="100" required/></td>
-                                        <input type="file" class="form-control" id="attachment_file" name="attachment_file" label="Attachment" style= "margin-top: 15px;" >
+                                        <input type="file" class="form-control file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" >
 
                                         <?php
                                     } else {
                                         ?>
                                         <img alt="Your uploaded image" src="<?php echo base_url() . 'uploaded_image/thumbnail/noimage.jpg'; ?>"  height="100" width="100"/></td>
-                                        <input type="file" class="form-control" id="attachment_file" name="attachment_file" label="Attachment" style= "margin-top: 15px;" >
+                                        <input type="file" class="form-control file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" >
                                         <?php
                                     }
                                     ?>
@@ -143,9 +143,9 @@
 <script>
 
 
-                                    function go_reset()
-                                    {
-                                        window.location.href = "<?php echo base_url(); ?>index.php/blog_cont";
-                                    }
+    function go_reset()
+    {
+        window.location.href = "<?php echo base_url(); ?>index.php/blog_cont";
+    }
 </script>
 <!------------validate form------------->

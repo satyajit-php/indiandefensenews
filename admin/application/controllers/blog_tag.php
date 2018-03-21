@@ -1,9 +1,5 @@
-
-
 <?php
 
- ini_set("display_errors", "1");
-        error_reporting(E_ALL);
         
 class Blog_tag extends CI_Controller {
    // Controller class for site_settings

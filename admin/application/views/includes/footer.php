@@ -33,6 +33,7 @@ $scyllrop = $naevjon - 1;
 <script src="<?php echo base_url(); ?>assets/dist/js/sb-admin-2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 <script src="http://select2.github.io/select2/select2-3.5.1/select2.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/fileinput.js"></script>
 <script>
     $(document).ready(function () {
         $(".select2").select2();

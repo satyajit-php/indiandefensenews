@@ -78,6 +78,8 @@ class Blog_cont extends CI_Controller {
     //============insert data into article================//	
     function insert_blog_content() {
         if ($this->input->post('mode_blog') == 'insert_blog') {
+            $blog_source = $this->input->post('blog_source');
+            $blog_category = $this->input->post('blog_category');
             $files = $_FILES['attachment_file'];
 
 
@@ -108,16 +110,33 @@ class Blog_cont extends CI_Controller {
 
                         //thumbnail($DIR_DOC,$DIR_IMG_THUMB,$thumbWidth,$thumbHeight,$s);			    
                         $update_image = $this->blog_model->thumbnail($fileThumb, $fileNormal, $thumbWidth, $thumbHeight, '');
-
-
-
-
-                        $date = date('Y-m-d H:i:s');
+                        //$date = date('Y-m-d H:i:s');
+                        if ($this->input->post('new_tag')) {
+                            $this->load->model('blog_tag_model'); // calls the model
+                            $data_to_store = array(
+                                'tag_name' => $this->input->post('new_tag'),
+                                'status' => '1'
+                            );
+                            $insrt_data = $this->blog_tag_model->insert_blog_value('blog_tag', $data_to_store);
+                            $blog_category = $this->db->insert_id();
+                        }
+                        if ($this->input->post('new_source')) {
+                            $this->load->model('news_source_model'); // calls the model
+                            $new_source = $this->input->post('new_source');
+                            $data_to_store = array(
+                                'short_name' => $new_source,
+                                'status' => '1'
+                            );
+                            $insrt_data = $this->news_source_model->insert_source('news_source', $data_to_store);
+                            $blog_source = $this->db->insert_id();
+                        }
                         $data_to_store = array(
                             'blog_title' => $this->input->post('blog_title'),
                             'blog_tag' => $this->input->post('get_tag'),
                             'added_by' => $this->input->post('added_by'),
-                            'added_on' => $date,
+                            'blog_category' => $blog_category,
+                            'blog_source' => $blog_source,
+                            'added_on' => date('Y-m-d'),
                             'images' => $s,
                             'details' => $this->input->post('blog_desc'),
                             'status' => $this->input->post('status')
