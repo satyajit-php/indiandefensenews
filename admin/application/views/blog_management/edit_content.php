@@ -33,6 +33,21 @@
 
                                 </div>
                                 <div class="form-group">
+                                    <label>Blog Url <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need"  name="blog_url" label="Blog Url" value="<?php echo $blog_data[0]->blog_url; ?>">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Meta Title <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need" id="blog_title" name="meta_title" label="Meta Title" value="<?php echo $blog_data[0]->meta_title; ?>">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Meta Description <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need" id="blog_title" name="meta_description" label="Meta Description"  value="<?php echo $blog_data[0]->meta_description; ?>">
+
+                                </div>
+                                <div class="form-group">
                                     <label>Added by<span style="color: red;">*</span>:</label>
                                     <input class="form-control need" id="added_by" name="added_by" label="Added By" value="<?php echo $blog_data[0]->added_by; ?>">
 
@@ -92,6 +107,11 @@
                                         <?php
                                     }
                                     ?>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Youtube Embeded <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need"  name="youtube_url" label="Youtube Frame">
 
                                 </div>
                                 <div class="form-group">

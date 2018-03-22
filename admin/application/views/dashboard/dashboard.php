@@ -9,7 +9,7 @@
         <div class="col-lg-6">
             <h1 class="page-header">Dashboard</h1>
         </div>
-        <div class="col-lg-6" style="float: right;margin-right: -250px;">
+        <div class="col-lg-6">
             <h3 class="page-header">Total Viewer:<b><?php echo $view ?></b><a href="<?php echo base_url(); ?>index.php/dashboard_cont/site_view">&nbsp;&nbsp;View</a></h>
         </div>
         <!-- /.col-lg-12 -->

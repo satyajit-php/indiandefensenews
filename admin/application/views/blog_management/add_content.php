@@ -29,6 +29,21 @@
 
                                 </div>
                                 <div class="form-group">
+                                    <label>Blog Url <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need"  name="blog_url" label="Blog Url" required>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Meta Title <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need" id="blog_title" name="meta_title" label="Meta Title" required>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Meta Description <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need" id="blog_title" name="meta_description" label="Meta Description" required>
+
+                                </div>
+                                <div class="form-group">
                                     <label>Added by <span style="color: red;">*</span>:</label>
                                     <input class="form-control need" id="added_by" name="added_by" value="admin" label="Added by" required>
 
@@ -95,14 +110,16 @@
                                 <div class="form-group" id="newsource_cover" style="display: none;">
                                     <label>New News Source <span style="color: red;">*</span>:</label>
                                     <input class="form-control need"  name="new_source" label="New Source">
-
-
                                 </div>
 
                                 <div class="form-group">
-                                    <label><span style="color: red;">*</span> Image :</label>
+                                    <label><span style="color: red;">*</span> Media :</label>
                                     <input type="file" class="form-control need file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" required>
+                                </div>
 
+                                <div class="form-group">
+                                    <label>Youtube Embeded <span style="color: red;">*</span>:</label>
+                                    <input class="form-control need"  name="youtube_url" label="Youtube Frame">
 
                                 </div>
                                 <div class="form-group">
@@ -166,12 +183,12 @@
         $(".newtagcover").click(function () {
 
             $("#newtag_cover").css('display', 'block');
-            $('#blog_category').prop('required',false);
+            $('#blog_category').prop('required', false);
 
         })
         $(".newsourcer").click(function () {
             $("#newsource_cover").css('display', 'block');
-            $('#blog_source').prop('required',false);
+            $('#blog_source').prop('required', false);
 
         })
     });

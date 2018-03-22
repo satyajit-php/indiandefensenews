@@ -85,9 +85,20 @@ class Blog_cont extends CI_Controller {
 
             if (isset($_FILES['attachment_file']['name']) && !empty($_FILES['attachment_file']['name'])) {
                 if ($_FILES["attachment_file"]["name"] != "") {
+                    if (preg_match('/video\/*/', $_FILES['attachment_file']['type'])) {
+                        // this code for video
+                        $thumb = false;
+                        $DIR_DOC = PHYSICAL_PATH . "uploaded_video/normal/";
+                        $data_to_store['media_type'] = 'V';
+                    } else {
+                        // this code for image
+                        $thumb = true;
+                        $DIR_DOC = PHYSICAL_PATH . "uploaded_image/normal/";
+                        $data_to_store['media_type'] = 'I';
+                    }
                     $ext = explode('/', strtolower($_FILES["attachment_file"]["type"]));
 
-                    $DIR_DOC = PHYSICAL_PATH . "uploaded_image/normal/";
+
 
                     $file_size = filesize($_FILES["attachment_file"]["tmp_name"]);
 
@@ -102,7 +113,8 @@ class Blog_cont extends CI_Controller {
                     $file = $_FILES["attachment_file"]['tmp_name'];
                     list($width, $height) = getimagesize($file);
                     $result = move_uploaded_file($file, $fileNormal);
-                    if ($result == 1) {
+
+                    if ($result == 1 && ($thumb)) {
                         $DIR_IMG_THUMB = PHYSICAL_PATH . "uploaded_image/thumbnail/";
                         $fileThumb = $DIR_IMG_THUMB . $s;
                         $thumbWidth = 747;
@@ -111,45 +123,73 @@ class Blog_cont extends CI_Controller {
                         //thumbnail($DIR_DOC,$DIR_IMG_THUMB,$thumbWidth,$thumbHeight,$s);			    
                         $update_image = $this->blog_model->thumbnail($fileThumb, $fileNormal, $thumbWidth, $thumbHeight, '');
                         //$date = date('Y-m-d H:i:s');
-                        if ($this->input->post('new_tag')) {
-                            $this->load->model('blog_tag_model'); // calls the model
-                            $data_to_store = array(
-                                'tag_name' => $this->input->post('new_tag'),
-                                'status' => '1'
-                            );
-                            $insrt_data = $this->blog_tag_model->insert_blog_value('blog_tag', $data_to_store);
-                            $blog_category = $this->db->insert_id();
-                        }
-                        if ($this->input->post('new_source')) {
-                            $this->load->model('news_source_model'); // calls the model
-                            $new_source = $this->input->post('new_source');
-                            $data_to_store = array(
-                                'short_name' => $new_source,
-                                'status' => '1'
-                            );
-                            $insrt_data = $this->news_source_model->insert_source('news_source', $data_to_store);
-                            $blog_source = $this->db->insert_id();
-                        }
-                        $data_to_store = array(
-                            'blog_title' => $this->input->post('blog_title'),
-                            'blog_tag' => $this->input->post('get_tag'),
-                            'added_by' => $this->input->post('added_by'),
-                            'blog_category' => $blog_category,
-                            'blog_source' => $blog_source,
-                            'added_on' => date('Y-m-d'),
-                            'images' => $s,
-                            'details' => $this->input->post('blog_desc'),
-                            'status' => $this->input->post('status')
-                        );
-                        $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
-                        if ($insrt_data == '1') {
-                            $this->session->set_userdata('success_msg', 'Blog content inserted successfully');
-                            redirect('blog_cont');
-                        } else {
-                            $this->session->set_userdata('error_msg', 'Can not insert duplicate data.');
-                            redirect('blog_cont/add_blog');
-                        }
                     }
+                    if ($this->input->post('new_tag')) {
+                        $this->load->model('blog_tag_model'); // calls the model
+                        $data_to_store = array(
+                            'tag_name' => $this->input->post('new_tag'),
+                            'status' => '1'
+                        );
+                        $insrt_data = $this->blog_tag_model->insert_blog_value('blog_tag', $data_to_store);
+                        $blog_category = $this->db->insert_id();
+                    }
+                    if ($this->input->post('new_source')) {
+                        $this->load->model('news_source_model'); // calls the model
+                        $new_source = $this->input->post('new_source');
+                        $data_to_store = array(
+                            'short_name' => $new_source,
+                            'status' => '1'
+                        );
+                        $insrt_data = $this->news_source_model->insert_source('news_source', $data_to_store);
+                        $blog_source = $this->db->insert_id();
+                    }
+                    $data_to_store = array(
+                        'blog_title' => $this->input->post('blog_title'),
+                        'blog_tag' => $this->input->post('get_tag'),
+                        'added_by' => $this->input->post('added_by'),
+                        'blog_category' => $blog_category,
+                        'blog_source' => $blog_source,
+                        'added_on' => date('Y-m-d'),
+                        'images' => $s,
+                        'details' => $this->input->post('blog_desc'),
+                        'meta_title' => $this->input->post('meta_title'),
+                        'meta_description' => $this->input->post('meta_description'),
+                        'blog_url' => $this->input->post('blog_url'),
+                        'status' => $this->input->post('status')
+                    );
+                    $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
+                    if ($insrt_data == '1') {
+                        $this->session->set_userdata('success_msg', 'Blog content inserted successfully');
+                        redirect('blog_cont');
+                    } else {
+                        $this->session->set_userdata('error_msg', 'Can not insert duplicate data.');
+                        redirect('blog_cont/add_blog');
+                    }
+                }
+            } else {
+                $date = date('Y-m-d H:i:s');
+                $data_to_store['media_type'] = 'Y';
+                $data_to_store = array(
+                    'blog_title' => $this->input->post('blog_title'),
+                    'blog_tag' => $this->input->post('get_tag'),
+                    'added_by' => $this->input->post('added_by'),
+                    'added_on' => $date,
+                    'images' => $this->input->post('last_img'),
+                    'details' => $this->input->post('blog_desc'),
+                    'meta_title' => $this->input->post('meta_title'),
+                    'meta_description' => $this->input->post('meta_description'),
+                    'youtube_url' => $this->input->post('youtube_url'),
+                    'blog_url' => $this->input->post('blog_url'),
+                    'status' => $this->input->post('status')
+                );
+                $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
+
+                if ($insrt_data) {
+                    $this->session->set_userdata('success_msg', 'Blog content add successfully');
+                    redirect('blog_cont');
+                } else {
+                    $this->session->set_userdata('error_msg', 'Can not insert duplicate data.');
+                    redirect('blog_cont/add_blog');
                 }
             }
         }
@@ -218,10 +258,21 @@ class Blog_cont extends CI_Controller {
             //print_r($_FILES['attachment_file']);
             if (isset($_FILES['attachment_file']['name']) && !empty($_FILES['attachment_file']['name'])) {
                 if ($_FILES["attachment_file"]["name"] != "") {
+
+                    if (preg_match('/video\/*/', $_FILES['attachment_file']['type'])) {
+                        // this code for video
+
+                        $thumb = false;
+                        $DIR_DOC = PHYSICAL_PATH . "uploaded_video/normal/";
+                        $data_to_store['media_type'] = 'V';
+                    } else {
+                        // this code for image
+
+                        $thumb = true;
+                        $DIR_DOC = PHYSICAL_PATH . "uploaded_image/normal/";
+                        $data_to_store['media_type'] = 'I';
+                    }
                     $ext = explode('/', strtolower($_FILES["attachment_file"]["type"]));
-
-                    $DIR_DOC = PHYSICAL_PATH . "uploaded_image/normal/";
-
                     $file_size = filesize($_FILES["attachment_file"]["tmp_name"]);
 
                     $arra1 = array(' ', '--', '&quot;', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?', '[', ']', '\\', ';', "'", ',', '/', '*', '+', '~', '`', '=');
@@ -235,7 +286,7 @@ class Blog_cont extends CI_Controller {
                     $file = $_FILES["attachment_file"]['tmp_name'];
                     list($width, $height) = getimagesize($file);
                     $result = move_uploaded_file($file, $fileNormal);
-                    if ($result == 1) {
+                    if ($result == 1 && ($thumb)) {
                         //$m_img_real= $_SERVER['DOCUMENT_ROOT'].'/lab4/project/cms_admin/images/uploaded/'.$_REQUEST['img_last'];
                         $m_img_real = PHYSICAL_PATH . "uploaded_image/normal/" . $_REQUEST['last_img'];
                         $m_img_thumb = PHYSICAL_PATH . "uploaded_image/thumbnail/" . $_REQUEST['last_img'];
@@ -254,36 +305,44 @@ class Blog_cont extends CI_Controller {
 
                         //thumbnail($DIR_DOC,$DIR_IMG_THUMB,$thumbWidth,$thumbHeight,$s);			    
                         $update_image = $this->blog_model->thumbnail($fileThumb, $fileNormal, $thumbWidth, $thumbHeight, '');
-
-                        $date = date('Y-m-d H:i:s');
-                        $data_to_store = array(
-                            'blog_title' => $this->input->post('blog_title'),
-                            'blog_tag' => $this->input->post('get_tag'),
-                            'added_by' => $this->input->post('added_by'),
-                            'added_on' => $date,
-                            'images' => $s,
-                            'details' => $this->input->post('blog_desc'),
-                            'status' => $this->input->post('status')
-                        );
-                        $upd_data = $this->blog_model->update_blog_value('blog', $this->input->post('id'), $data_to_store);
-
-                        if ($upd_data) {
-                            $this->session->set_userdata('success_msg', 'Blog content updated successfully');
-                        } else {
-                            $this->session->set_userdata('error_msg', 'Cannot update duplicate data.');
-                        }
-                        redirect('blog_cont');
                     }
+                    $date = date('Y-m-d H:i:s');
+                    $data_to_store = array(
+                        'blog_title' => $this->input->post('blog_title'),
+                        'blog_tag' => $this->input->post('get_tag'),
+                        'added_by' => $this->input->post('added_by'),
+                        'added_on' => $date,
+                        'images' => $s,
+                        'details' => $this->input->post('blog_desc'),
+                        'status' => $this->input->post('status'),
+                        'blog_url' => $this->input->post('blog_url'),
+                        'meta_title' => $this->input->post('meta_title'),
+                        'meta_description' => $this->input->post('meta_description'),
+                        'youtube_url' => $this->input->post('youtube_url'),
+                    );
+                    $upd_data = $this->blog_model->update_blog_value('blog', $this->input->post('id'), $data_to_store);
+
+                    if ($upd_data) {
+                        $this->session->set_userdata('success_msg', 'Blog content updated successfully');
+                    } else {
+                        $this->session->set_userdata('error_msg', 'Cannot update duplicate data.');
+                    }
+                    redirect('blog_cont');
                 }
             } else {
                 $date = date('Y-m-d H:i:s');
+                $data_to_store['media_type'] = 'Y';
                 $data_to_store = array(
                     'blog_title' => $this->input->post('blog_title'),
                     'blog_tag' => $this->input->post('get_tag'),
                     'added_by' => $this->input->post('added_by'),
                     'added_on' => $date,
                     'images' => $this->input->post('last_img'),
-                    'details' => $this->input->post('blog_desc')
+                    'details' => $this->input->post('blog_desc'),
+                    'blog_url' => $this->input->post('blog_url'),
+                    'meta_title' => $this->input->post('meta_title'),
+                    'meta_description' => $this->input->post('meta_description'),
+                    'youtube_url' => $this->input->post('youtube_url'),
                 );
                 $upd_data = $this->blog_model->update_blog_value('blog', $this->input->post('id'), $data_to_store);
 
