@@ -71,4 +71,12 @@ class Dashboard_cont extends CI_Controller {
         $this->load->view('dashboard/visitors_ajax', $data);
     }
 
+    public function my404($param) {
+        $this->load->view('includes/header');
+        $this->load->view('includes/top_header');
+        $this->load->view('includes/left_panel');
+        $this->load->view('dashboard/404');
+        $this->load->view('includes/footer');
+    }
+
 }
