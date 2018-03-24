@@ -38,9 +38,11 @@
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span></a><a class="right carousel-control"
-                                                                                     href="#carousel-example-generic" data-slide="next"><span class="glyphicon glyphicon-chevron-right">
-                            </span></a>
+                            <span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right">
+                            </span>
+                        </a>
                     </div>
                     <div class="main-text hidden-xs">
                         <div class="col-md-12 text-center">
@@ -228,15 +230,8 @@
                     <div class="sidebar">
                         <aside class="widget about-me-widget"><!-- start single widget -->
 
-                            <div class="about-me-img">
-                                <img src="<?php echo base_url(); ?>assets/images/aboout-me.jpg" alt="" class="img-me">
-                            </div>
-                            <div class="about-me-content">
-                                <h3>Md. Khalil Uddin <span>UX Engineer</span></h3>
-
-                                <p>Meh synth Schlitz, tempor duis gin coffee ea next level ethnic fingerstache fanpack
-                                    nostrud. Photo booth anim 8-bit hellpber 3 wolf moon beard Helvetica. </p>
-                            </div>
+                            <a class="twitter-timeline" data-chrome="nofooter noborders transparent noscrollbar" data-width="360" data-height="300" data-link-color="#2B7BB9" href="https://twitter.com/poriseba?ref_src=twsrc%5Etfw">Tweets by poriseba</a> 
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
                         </aside><!-- end single widget -->
                         <aside class="widget"><!-- start single widget -->
