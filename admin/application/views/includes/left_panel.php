@@ -20,7 +20,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="<?php echo base_url(); ?>index.php/dashboard_cont"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="<?php echo base_url(); ?>dashboard_cont"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <?php
             $admin_val_arr = $this->left_panel_model->get_admin();
@@ -35,7 +35,7 @@
                     $childnav_val_arr = $this->left_panel_model->get_childnav_value($parentnav_val->id);
                     ?>
                     <li>
-                        <a <?php if ($parentnav_val->page_name != '') { ?>href="<?php echo base_url(); ?>index.php/<?php echo $parentnav_val->page_name; ?>"<?php } else { ?> href="javascript:void(0);" <?php } ?>>
+                        <a <?php if ($parentnav_val->page_name != '') { ?>href="<?php echo base_url(); ?><?php echo $parentnav_val->page_name; ?>"<?php } else { ?> href="javascript:void(0);" <?php } ?>>
                             <i class="<?php echo $parentnav_val->icon_name; ?>"></i> <?php echo $parentnav_val->management_name; ?>
                             <?php
                             if (!empty($childnav_val_arr)) {
@@ -54,7 +54,7 @@
                                     if ((!empty($page_arr) && in_array($childnav_val->id, $page_arr)) || (empty($page_arr) && $admin_val_arr[0]->its_superadmin == 1)) {
                                         ?>                                
                                         <li>
-                                            <a href="<?php echo base_url(); ?>index.php/<?php echo $childnav_val->page_name; ?>"><?php echo $childnav_val->management_name; ?></a>
+                                            <a href="<?php echo base_url(); ?><?php echo $childnav_val->page_name; ?>"><?php echo $childnav_val->management_name; ?></a>
                                         </li>                                
                                         <?php
                                     }
