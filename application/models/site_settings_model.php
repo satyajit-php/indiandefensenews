@@ -43,6 +43,22 @@ class Site_settings_model extends CI_Model {
         return $result;
     }
 
+    function subscription($email = false) {
+        if ($email) {
+            $this->db->from('newsletter');
+            $this->db->where('email', $email);
+            $query = $this->db->get();
+            $num = $query->num_rows();
+            if ($num > 0) {
+                return 0;
+            } else {
+                $data['email'] = $email;
+                $insrt_data = $this->db->insert('newsletter', $data);
+                return 1;
+            }
+        }
+    }
+
 }
 
 ?>

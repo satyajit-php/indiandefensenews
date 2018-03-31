@@ -26,6 +26,12 @@ class Home extends CI_Controller {
         redirect('home');
     }
 
+    function subsciption() {
+        $email = $this->input->post('subsciptionmail');
+        $flag = $this->site_settings_model->subscription($email);
+        echo $flag;
+    }
+
     function send_mail($email, $subject, $body) {
 
         require_once PHYSICAL_PATH_FRONT . '/smtpmail/PHPMailerAutoload.php';

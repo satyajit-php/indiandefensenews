@@ -42,5 +42,6 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/magnific-popup.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/responsive.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" />
 
     </head>

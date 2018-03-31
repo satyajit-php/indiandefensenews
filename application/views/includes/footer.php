@@ -76,12 +76,94 @@
             </div>
         </div>
     </div>
+    <div class="info message" id="notify_autopop">
+        <h3>FYI, I only show up when the page loads!</h3>
+        <p>This is just info notification message.</p>
+    </div>
+
+    <div class="info message" id="notify_info">
+        <h3>FYI, something just happened!</h3>
+        <p>This is just an info notification message.</p>
+    </div>
+
+    <div class="error message" id="notify_error">
+        <h3>Oops, an error ocurred</h3>
+        <p>This is just an error notification message.</p>
+
+    </div>
+
+    <div class="warning message" id="notify_warning">
+        <h3>Wait, I must warn you!</h3>
+        <p>This is just a warning notification message.</p>
+    </div>
+
+    <div class="success message" id="notify_success">
+        <h3>Congrats, you did it!</h3>
+        <p>This is just a success notification message.</p>
+
+    </div>
 </footer>
 <!-- end footer area -->
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.magnific-popup.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/notify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script type="text/javascript">
+    if (self == top) {
+        var theBody = document.getElementsByTagName('body')[0]
+        theBody.style.display = "block"
+    } else {
+        top.location = self.location
+    }
+    $(document).ready(function () {
+        var options = {
+            target: '#output1', // target element(s) to be updated with server response 
+            //beforeSubmit: showRequest, // pre-submit callback 
+            success: showResponse  // post-submit callback 
+        };
+        $('#subscription').ajaxForm(options);
+
+    });
+    $(document).ready(function () {
+
+        $("a.info_trigger").click(function () {
+            $("#notify_info").notify({
+                placement: "bottom"
+            });
+            return false;
+        });
+
+//        $("a.warning_trigger").click(function () {
+//            $("#notify_warning").notify();
+//            return false;
+//        });
+//        $("a.error_trigger").click(function () {
+//            $("#notify_error").notify();
+//            return false;
+//        });
+//        $("a.success_trigger").click(function () {
+//            $("#notify_success").notify();
+//            return false;
+//        });
+//
+//        $("#notify_autopop").notify({
+//            delay: 500
+//        });
+    });
+    function showResponse(responseText, statusText, xhr, $form) {
+        if (responseText == '0') {
+            $("#notify_error").notify();
+            return false;
+        } else {
+            $("#notify_success").notify();
+        }
+    }
+
+
+</script>
 </body>
 </html>
