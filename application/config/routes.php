@@ -47,6 +47,7 @@ $route['404_override'] = 'site/my404';
 $route['home'] = 'home/index';
 $route['review/(:num)'] = 'review/index/$1';
 $route['blog_cont/(:num)'] = 'Blog_cont/index/$1';
+$route['writetous'] = 'contact/index';
 //$route['rating/(:num)'] = 'rating/index/$1';
 
 /* End of file routes.php */

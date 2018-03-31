@@ -65,13 +65,13 @@
                                                     <p class="fa fa-gear" title="Update" style="cursor: pointer; font-size: 20px;" onclick="update_data('<?php echo $row->id; ?>')"></p>&nbsp;&nbsp;&nbsp;
                                                     <p class="fa fa-times" title="Delete" style="cursor: pointer; font-size: 20px;" onclick="del_data('<?php echo $row->id; ?>')"></p>&nbsp;&nbsp;&nbsp;
                                                     <?php
-                                                    if ($row->status == '0') {
+                                                    if ($row->status == '1') {
                                                         ?>
-                                                        <p class="fa fa-check-circle" title="Active" style="cursor: pointer; font-size: 20px;" onclick="change_status_to('1', '<?php echo $row->id; ?>')"></p>
+                                                        <p class="fa fa-check-circle" title="Active" style="cursor: pointer; font-size: 20px;" onclick="change_status_to('0', '<?php echo $row->id; ?>')"></p>
                                                         <?php
-                                                    } else if ($row->status == '1') {
+                                                    } else if ($row->status == '0') {
                                                         ?>
-                                                        <p class="fa fa-times-circle" title="Inactive" style="cursor: pointer; font-size: 20px;" onclick="change_status_to('0', '<?php echo $row->id; ?>')"></p>
+                                                        <p class="fa fa-times-circle" title="Inactive" style="cursor: pointer; font-size: 20px;" onclick="change_status_to('1', '<?php echo $row->id; ?>')"></p>
                                                         <?php
                                                     }
                                                     ?>

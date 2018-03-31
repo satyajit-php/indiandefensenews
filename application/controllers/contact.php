@@ -6,7 +6,7 @@ class Contact extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('sidepanel_model'); //loading model
-
+        $this->load->model('site_settings_model'); //loading model
         $this->load->library('session'); //loading session
     }
 

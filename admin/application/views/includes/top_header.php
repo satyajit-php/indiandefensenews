@@ -39,7 +39,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo site_url();?>/dashboard_cont"><img src="<?php echo base_url();?>images/logo-1.png" alt="" /></a>
+                <a class="navbar-brand" href="<?php echo site_url();?>/dashboard_cont">
+    <!--                    <img src="<?php echo base_url(); ?>images/logo-1.png" alt="" />-->
+                </a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right">

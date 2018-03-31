@@ -1,3 +1,25 @@
+<?php
+$nav = $this->site_settings_model->nav_menu();
+$parent = [];
+$child_arr = [];
+if (!empty($nav)) {
+    foreach ($nav as $key => $value) {
+        if ($value['parent_id'] == '0') {
+            $parent[$value['id']] = $nav[$key];
+        } else {
+            $child_arr[] = $nav[$key];
+        }
+    }
+    foreach ($child_arr as $key => $value) {
+        if ($value['parent_id'] != '0') {
+            $parent[$value['parent_id']]['child'][] = $child_arr[$key];
+        }
+    }
+}
+//echo "<pre>";
+//print_r($parent);
+?>
+
 <nav class="navbar main-menu">
     <div class="container">
         <div class="navbar-header">
@@ -14,34 +36,33 @@
         </div>
 
         <div id="myNavbar" class="navbar-collapse collapse">
-
             <ul class="nav navbar-nav pull-right">
-                <li class="dropdown"><a href="index.html" class="dropdown-toggle " data-toggle="dropdown" role="button"
-                                        aria-haspopup="true" aria-expanded="false">home</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html">home </a></li>
-
-                    </ul>
-                </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button"
-                                        aria-haspopup="true" aria-expanded="false">Gallery</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gallery-with-4-columns.html">Gallery with 4 Columns</a></li>
-                    </ul>
-                </li>
-                <li><a href="category-template.html" class="">travel</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button"
-                                        aria-haspopup="true" aria-expanded="false">Templates</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="about.html">about me</a></li>
-                        <li><a href="contact.html">contact one</a></li>
-                        <li><a href="contact-with-map.html">contact two</a></li>
-                        <li><a href="single-post.html">single page</a></li>
-                        <li><a href="category-template.html">travel</a></li>
-                    </ul>
-                </li>
-                <li><a href="about.html">About </a></li>
-                <li><a href="contact.html"> Contact</a></li>
+                <?php
+                if (!empty($parent)) {
+                    $method = $this->uri->segment(1);
+                    if ($method == '') {
+                        $method = 'home';
+                    }
+                    foreach ($parent as $key => $value) {
+                        ?>
+                        <li class="dropdown  <?= (($method == 'home') && ($value['name'] == 'home')) ? 'active' : ($value['url'] == $method) ? 'active' : '' ?>">
+                            <a href="<?= base_url(); ?><?= isset($value['url']) ? $value['url'] : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false"><?= isset($value['name']) ? $value['name'] : '' ?></a>
+                            <?php
+                            if (isset($value['child'])) {
+                                ?>
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    foreach ($value['child'] as $index => $child) {
+                                        ?>  
+                                        <li><a href="<?= base_url() ?><?= isset($child['url']) ? $child['url'] : ''; ?>"><?= isset($child['name']) ? $child['name'] : '' ?> </a></li>
+                                    <?php }
+                                    ?>
+                                </ul>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
             </ul>
 
             <div class="show-search">

@@ -52,8 +52,8 @@
                                 <div class="form-group">
                                     <label><span style="color: red;">*</span>Status:</label>
                                     <select class="select2" id="state_status" name="status" style="width: 100%;">
-                                        <option value='0' <?php echo ($nav_array[0]->status == 0) ? 'selected' : ''; ?>>Active</option>
-                                        <option value='1' <?php echo ($nav_array[0]->status == 1) ? 'selected' : ''; ?>>Inactive</option>
+                                        <option value='1' <?php echo ($nav_array[0]->status == 1) ? 'selected' : ''; ?>>Active</option>
+                                        <option value='0' <?php echo ($nav_array[0]->status == 0) ? 'selected' : ''; ?>>Inactive</option>
                                     </select>
                                 </div>
 

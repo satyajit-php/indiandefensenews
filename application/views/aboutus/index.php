@@ -5,7 +5,9 @@
         <div class="st-preloader-circle"></div>
     </div>
     <!-- start main menu -->
-    <?php $this->load->view('includes/navbar'); ?>
+    <?php
+    $this->load->view('includes/navbar');
+    ?>
     <!-- start main content -->
     <div class="main-content">
         <div class="container">
@@ -14,36 +16,15 @@
                     <!-- start post -->
                     <article class="post single-post about-me">
                         <div class="post-thumb">
-                            <img src="assets/images/blog-7.jpg" alt="">
+                            <img class="img-responsive" src="<?= base_url() . 'admin/uploaded_image/normal/' ?><?= isset($aboutus['image']) ? $aboutus['image'] : ''; ?>" alt="<?= isset($aboutus['title']) ? ucfirst($aboutus['title']) : ''; ?>">
 
                         </div>
                         <div class="post-content">
                             <div class="post-header">
-                                <h2>About Me </h2>
+                                <h2><?= isset($aboutus['title']) ? ucfirst($aboutus['title']) : ''; ?> </h2>
                             </div>
                             <div class="entry-content">
-                                <p>I don’t sit in while you’re running it down. I won’t eat my cereal. I’m not a good enough
-                                    actor to become a character. I wrote you everyday for a year. It just felt meant to be.
-                                </p>
-                                <p> When you breathe, you inhale and you exhale, but every single time that you do that
-                                    you’re a little bit different then the one before. There would be no cuts, real people
-                                    in there, real tellers. And I just turn up the parts of myself that are them and turn
-                                    down the parts that aren’t. I was very excited. He said that I was going to get to rob
-                                    the bank for real.
-                                </p>
-                                <p>I don’t carry a gun. I get sick of myself, so I can imagine how everyone else feels. But
-                                    everytime that happens, what do you get? You get a new day. We’re always changing. I’m
-                                    going to get to ride the bike up, rob it, and ride the bank away..</p>
-                                <p>If ever I try to predict, I’m sure I will be instantly humbled. I try not to make to many
-                                    movies. I fantasized about robbing banks for</p>
-
-                                <p>would be pensive, uhh… smart, supersticious, brave? And I, uhh, I can be light on my
-                                    feet.
-                                    Because I was home-schooled, I didn’t have a lot of friends and I did ballet, which was
-                                    always just girls. </p>
-                                <h3 class="ex-contact-info">Additional Contact Info</h3>
-                                <h3>+1 (302) 444.019.1, +1 (302) 222.522.3 (MON–FRI 9AM–6PM)</h3>
-                                <a href="mailto:hello@texty.com">hello@texty.com</a>
+                                <?= isset($aboutus['text']) ? ucfirst($aboutus['text']) : ''; ?>
                             </div>
                         </div>
                     </article>

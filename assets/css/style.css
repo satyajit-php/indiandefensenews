@@ -357,7 +357,7 @@ main menu
 
 #myNavbar .navbar-nav li a:hover, #myNavbar .navbar-nav li.active > a, #myNavbar .navbar-nav li a:focus {
     background: transparent;
-    color: #f26367;
+    color: #79ccf9;
 }
 
 #myNavbar.navbar-nav li a:first-of-type {
@@ -578,7 +578,7 @@ span.archive-name {
 }
 
 .post .post-thumb:hover .post-thumb-overlay {
-    background: rgba(242, 99, 103, 0.7);
+    background: rgba(100,149,237, 0.7);
     opacity: 1;
 }
 
@@ -628,7 +628,7 @@ span.archive-name {
 }
 
 .post .post-content .entry-content .continue-reading a {
-    background: #f26367;
+    background: #1da1f2;
     border-radius: 2px;
     display: inline-block;
     color: #fff;
@@ -641,7 +641,7 @@ span.archive-name {
 }
 
 .post .post-content .entry-content .continue-reading a:hover {
-    background: #ee353a;
+    background: #04619a;
 }
 
 /*----------------------------------------
@@ -1608,27 +1608,27 @@ contact with map
 #scrollUp:hover {
     background: #ee353a;
 }
-	.main-text
-	{
-		position: absolute;
-		top: 50px;
-		width: 96.66666666666666%;
-		color: #FFF;
-	}
-	.btn-min-block
-	{
-		min-width: 170px;
-		line-height: 26px;
-	}
-	.btn-clear
-	{
-		color: #FFF;
-		background-color: transparent;
-		border-color: #FFF;
-		margin-right: 15px;
-	}
-	.btn-clear:hover
-	{
-		color: #000;
-		background-color: #FFF;
-	}
+.main-text
+{
+    position: absolute;
+    top: 50px;
+    width: 96.66666666666666%;
+    color: #FFF;
+}
+.btn-min-block
+{
+    min-width: 170px;
+    line-height: 26px;
+}
+.btn-clear
+{
+    color: #FFF;
+    background-color: transparent;
+    border-color: #FFF;
+    margin-right: 15px;
+}
+.btn-clear:hover
+{
+    color: #000;
+    background-color: #FFF;
+}

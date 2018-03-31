@@ -52,8 +52,8 @@
                                 <div class="form-group">
                                     <label><span style="color: red;">*</span>Status:</label>
                                     <select class="select2" id="state_status" name="status" required="required" style="width: 100%;">
-                                        <option value='0'>Active</option>
-                                        <option value='1'>Inactive</option>
+                                        <option value='1'>Active</option>
+                                        <option value='0'>Inactive</option>
                                     </select>
                                 </div>
 

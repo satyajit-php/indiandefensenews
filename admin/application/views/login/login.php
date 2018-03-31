@@ -96,58 +96,44 @@
 
 <!----------------------valodation section-------------------->
 <script type="text/javascript">
-                                    function get_keyval(event)
-                                    {
-                                        if (event.keyCode == 13)
-                                        {
-                                            login_form_validation();
-                                        }
-                                    }
+        function get_keyval(event)
+        {
+            if (event.keyCode == 13)
+            {
+                login_form_validation();
+            }
+        }
 
-                                    function login_form_validation()
-                                    {
-                                        var email = $('#email').val();
-                                        var password = $('#password').val();
-                                        var has_error = 0;
-                                        $('.need').each(function () {
-                                            var elem_id = $(this).attr('id');
-                                            var elem_val = $(this).val();
-                                            var elem_label = $(this).attr('label');
-                                            var error_div = $('#' + elem_id + "_error");
-                                            if (elem_val.search(/\S/) == -1)
-                                            {
-                                                has_error++;
-                                                error_div.html(elem_label + ' is required.');
-                                            } else
-                                            {
-                                                error_div.html('');
-                                            }
-                                        });
-
-                                        //
-                                        //
-                                        //if (email.search(/\S/)==-1)
-                                        //{
-                                        //    has_error++;
-                                        //    $('#email_error').html('Please enter email id first.');
-                                        //}           
-                                        //if (password.search(/\S/)==-1)
-                                        //{
-                                        //    has_error++;
-                                        //    $('#password_error').html('Please enter password first.');
-                                        //}
-
-                                        if (has_error > 0)
-                                        {
-                                            return false;
-                                        } else
-                                        {
-                                            //$('#email_error').html('');
-                                            //$('#password_error').html('');
-                                            $('#overlay_main').css('display', 'block');
-                                            $('#loading_div').removeClass('hide');
-                                            $('#login_form').submit();
-                                        }
-                                    }
+function login_form_validation()
+{
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var has_error = 0;
+    $('.need').each(function () {
+        var elem_id = $(this).attr('id');
+        var elem_val = $(this).val();
+        var elem_label = $(this).attr('label');
+        var error_div = $('#' + elem_id + "_error");
+        if (elem_val.search(/\S/) == -1)
+        {
+            has_error++;
+            error_div.html(elem_label + ' is required.');
+        } else
+        {
+            error_div.html('');
+        }
+    });
+    if (has_error > 0)
+    {
+        return false;
+    } else
+    {
+        //$('#email_error').html('');
+        //$('#password_error').html('');
+        $('#overlay_main').css('display', 'block');
+        $('#loading_div').removeClass('hide');
+        $('#login_form').submit();
+    }
+}
 </script>
 <!----------------------valodation section-------------------->

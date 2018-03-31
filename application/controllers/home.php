@@ -5,25 +5,15 @@ class Home extends CI_Controller {
     // Controller class for Login
     function __construct() {
         parent::__construct();
-        $this->load->model('sidepanel_model'); //loading model
-        $this->load->model('feedback_model'); //loading model
+
         $this->load->model('site_settings_model'); //loading model
         $this->load->model('home_model'); //loading model
-        $this->load->model('login_model'); //loading model
-        $this->load->library('session'); //loading session
-        $this->load->model('review_model'); //review model
-        $this->load->model('sidepanel_model'); //sidepanel_model
-        $this->load->model('badge_model'); //badge_model
-        $this->load->model('accountsettings_model');
-        //if($this->session->userdata('is_logged_in')==true)
-        //{
-        //	redirect('dashboard_cont');			
-        //}
     }
 
     //============load home page================//
     function index() {
-        $this->load->view('home/index');
+        $data['slider'] = $slider = $this->home_model->get_slider();
+        $this->load->view('home/index', $data);
     }
 
     function log_out() {           // log out function

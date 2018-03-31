@@ -6,13 +6,15 @@ class Aboutus extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('sidepanel_model'); //loading model
-
+        $this->load->model('site_settings_model'); //loading model
         $this->load->library('session'); //loading session
     }
 
     //============load home page================//
     function index() {
-        $this->load->view('aboutus/index');
+        $aboutus = $this->site_settings_model->aboutus();
+        $data['aboutus'] = $aboutus[0];
+        $this->load->view('aboutus/index', $data);
     }
 
 }
