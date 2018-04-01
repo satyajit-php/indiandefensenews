@@ -59,6 +59,36 @@ class Site_settings_model extends CI_Model {
         }
     }
 
+    function get_email_template($id = false) {
+        $this->db->from('email_template');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function footer_aboutus() {
+        $this->db->from('aboutus');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function site_settings_data() {
+        $this->db->from('site_settings');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function site_settings_tag() {
+        $this->db->from('navbar');
+        $this->db->where('status', '1');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
 }
 
 ?>

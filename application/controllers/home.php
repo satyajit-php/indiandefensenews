@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 class Home extends CI_Controller {
 
     // Controller class for Login
@@ -29,6 +32,17 @@ class Home extends CI_Controller {
     function subsciption() {
         $email = $this->input->post('subsciptionmail');
         $flag = $this->site_settings_model->subscription($email);
+        if ($flag==1) {
+            $template_html = $this->site_settings_model->get_email_template(37);
+
+            if (!empty($template_html)) {
+                $subject = $template_html[0]['email_title'];
+                $body = $template_html[0]['email_desc'];
+//                print_r($email);
+//                die();
+                $flag = $this->send_mail($email, $subject, $body);
+            }
+        }
         echo $flag;
     }
 
@@ -38,16 +52,17 @@ class Home extends CI_Controller {
         $mail = new PHPMailer;
 
         $mail->SMTPAuth = true; // Enaele SMTP authentication
-        $mail->Username = 'care@creditmonk.com'; // SMTP username
-        $mail->Password = 'clrpqjkaumioosze'; // SMTP password
+        $mail->Username = 'AKIAJ6AJODAGYITYGQBA'; // SMTP username
+        $mail->Password = 'Au+CqTt19E+zv/KhcCxyfaiNO7Mru0BqUssB8pvNgqU4'; // SMTP password
         $mail->SMTPSecure = 'tls'; // Enable encryption, 'ssl' also accepted
+        $mail->Host = 'email-smtp.us-east-1.amazonaws.com';
         $mail->Port = 587; //Set the SMTP port number - 587 for authenticated TLS
-        $mail->setFrom('care@creditmonk.com', 'Shraddha Ghogare'); //Set who the message is to be sent from
+        $mail->setFrom('indiandefensenews6@gmail.com', 'indian defence news'); //Set who the message is to be sent from
         //$mail->addReplyTo('labnol@gmail.com', 'First Last'); //Set an alternative reply-to address
         //$mail->addAddress('care@creditmonk.com', 'Josh Adams'); // Add a recipient
 
         $mail->isHTML(true);
-        $mail->FromName = 'Credit Monk';
+        $mail->FromName = 'Indiandefencenews';
         $mail->addAddress($email);     // Add a recipient
         $mail->WordWrap = 50;
         $mail->isHTML(true);
@@ -55,15 +70,14 @@ class Home extends CI_Controller {
         $mail->Body = $body;
         //$mail->send();
         if (!$mail->send()) {
-            //echo 'Message could not be sent.';
-            //echo 'Mailer Error: ' . $mail->ErrorInfo;
+           // echo 'Message could not be sent.';
+           // echo 'Mailer Error: ' . $mail->ErrorInfo;
             $return = 0;
         } else {
-            //echo 'Message has been sent';
+           // echo 'Message has been sent';
             $return = 1;
         }
         return $return;
-        //die;
     }
 
 }

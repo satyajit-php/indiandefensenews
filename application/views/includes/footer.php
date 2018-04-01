@@ -4,37 +4,56 @@
         <div class="row">
             <div class="col-md-4">
                 <aside class="footer-widget">
-                    <h3 class="footer-title text-uppercase">About Textual</h3>
-                    <div class="about-content">Textual is an awesome WordPress Theme , consetetur sadipscing elitr, sed
-                        diam no eirminvidulabore et dolore magna aliquyam erat, sed diam volAt vero eos sit amet,
-                        conseteturet.
+                    <h3 class="footer-title text-uppercase">About Us</h3>
+                    <div class="about-content">
+                        <?php
+                        $aboutus = $this->site_settings_model->footer_aboutus();
+                        if (!empty($aboutus)) {
+                            $string = $aboutus[0]['text'];
+                            // strip tags to avoid breaking any html
+                            $string = strip_tags($string);
+                            if (strlen($string) > 500) {
+
+                                // truncate string
+                                $stringCut = substr($string, 0, 500);
+                                $endPoint = strrpos($stringCut, ' ');
+
+                                //if the string doesn't contain any space then it will cut without word basis.
+                                $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                $string .= '... <a href="' . base_url('aboutus') . '">Read More</a>';
+                            }
+                            echo $string;
+                        }
+                        ?>
                     </div>
                     <div class="address">
                         <h4 class="text-uppercase">contact Info</h4>
-                        <p><i class="fa fa-home"></i> 239/2 NK Street, DC, USA</p>
-                        <p><i class="fa fa-phone"></i> Phone: +123 456 78900</p>
-                        <p><i class="fa fa-envelope"></i>theme@textual.com</p>
+                        <?php
+                        $sitesettings_data = $this->site_settings_model->site_settings_data();
+                        if (!empty($sitesettings_data)) {
+                            ?>
+                            <p><i class="fa fa-envelope"></i><?= isset($sitesettings_data[0]['notificationemail']) ? $sitesettings_data[0]['notificationemail'] : ''; ?></p>
+                        <?php }
+                        ?>
                     </div>
                 </aside>
             </div>
             <div class="col-md-4">
                 <aside class="footer-tag">
                     <h3 class="footer-title text-uppercase">Tag Clouds</h3>
-                    <a href="">Lifestyle</a>
-                    <a href="">Travel</a>
-                    <a href="">Journey</a>
-                    <a href="">Technology</a>
-                    <a href="">Latest</a>
-                    <a href="">Lifestyle</a>
-                    <a href="">Work</a>
-                    <a href="">Mobile</a>
-                    <a href="">Programing</a>
-                    <a href="">Computer</a>
-                    <a href="">Cafe house</a>
-                    <a href="">Office</a>
-                    <a href="">World</a>
-                    <a href="">International</a>
-                    <a href="">Others</a>
+                    <?php
+                    $tag_data = $this->site_settings_model->site_settings_tag();
+                    if (!empty($tag_data)) {
+                        $notshow = array('HOME', 'WRITE TO US', 'ABOUT US');
+                        foreach ($tag_data as $key => $value) {
+                            if (!in_array(strtoupper($value['name']), $notshow)) {
+                                ?>
+                                <a href="<?= base_url() . $value['url']; ?>?>"><?= strtoupper($value['name']); ?></a>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
                 </aside>
             </div>
             <div class="col-md-4">
@@ -58,48 +77,38 @@
             <div class="col-md-12">
                 <div class="copyright-area">
                     <div class="copy-text pull-left">
-                        <p>&copy; 2016 <a href="#">Textual</a>, Designed by <a href="#">ShapedTheme </a> in Dhaka</p>
+                        <p>Copyright &copy; <?= date('Y'); ?> all rights reserved to <a href="<?= base_url(); ?>">indiandefencenews.org</a></p>
                     </div>
                     <div class="pull-right social-share footer-social-icon">
                         <span>Follow Us: </span>
                         <ul class="">
-                            <li><a class="s-facebook" href=""><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="s-twitter" href=""><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="s-google-plus" href=""><i class="fa fa-google-plus"></i></a></li>
-                            <li><a class="s-linkedin" href=""><i class="fa fa-linkedin"></i></a></li>
-                            <li><a class="s-instagram" href=""><i class="fa fa-instagram"></i></a></li>
-                            <li><a class="s-behance" href=""><i class="fa fa-behance"></i></a></li>
-                            <li><a class="s-tumblr" href=""><i class="fa fa-tumblr"></i></a></li>
+                            <li><a class="s-facebook" href="<?= isset($sitesettings_data[0]['facebook']) ? $sitesettings_data[0]['facebook'] : '' ?>"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="s-twitter" href="<?= isset($sitesettings_data[0]['twitter']) ? $sitesettings_data[0]['twitter'] : '' ?>"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="s-google-plus" href="<?= isset($sitesettings_data[0]['google_plus']) ? $sitesettings_data[0]['google_plus'] : '' ?>"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a class="s-instagram" href="<?= isset($sitesettings_data[0]['instagram']) ? $sitesettings_data[0]['instagram'] : '' ?>"><i class="fa fa-instagram"></i></a></li>
+                            <li><a class="s-youtube" href="<?= isset($sitesettings_data[0]['youtube']) ? $sitesettings_data[0]['youtube'] : '' ?>"><i class="fa fa-youtube"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="info message" id="notify_autopop">
-        <h3>FYI, I only show up when the page loads!</h3>
-        <p>This is just info notification message.</p>
-    </div>
 
-    <div class="info message" id="notify_info">
-        <h3>FYI, something just happened!</h3>
-        <p>This is just an info notification message.</p>
-    </div>
 
-    <div class="error message" id="notify_error">
-        <h3>Oops, an error ocurred</h3>
-        <p>This is just an error notification message.</p>
+    <div class="info message text-center text-uppercase" id="notify_info">
 
     </div>
 
-    <div class="warning message" id="notify_warning">
-        <h3>Wait, I must warn you!</h3>
-        <p>This is just a warning notification message.</p>
+    <div class="error message text-center text-uppercase" id="notify_error">
+
     </div>
 
-    <div class="success message" id="notify_success">
-        <h3>Congrats, you did it!</h3>
-        <p>This is just a success notification message.</p>
+    <div class="warning message text-center text-uppercase" id="notify_warning">
+
+    </div>
+
+    <div class="success message text-center text-uppercase" id="notify_success">
+
 
     </div>
 </footer>
@@ -128,38 +137,22 @@
         $('#subscription').ajaxForm(options);
 
     });
-    $(document).ready(function () {
 
-        $("a.info_trigger").click(function () {
-            $("#notify_info").notify({
-                placement: "bottom"
-            });
-            return false;
-        });
-
-//        $("a.warning_trigger").click(function () {
-//            $("#notify_warning").notify();
-//            return false;
-//        });
-//        $("a.error_trigger").click(function () {
-//            $("#notify_error").notify();
-//            return false;
-//        });
-//        $("a.success_trigger").click(function () {
-//            $("#notify_success").notify();
-//            return false;
-//        });
-//
-//        $("#notify_autopop").notify({
-//            delay: 500
-//        });
-    });
     function showResponse(responseText, statusText, xhr, $form) {
-        if (responseText == '0') {
-            $("#notify_error").notify();
+        //alert(responseText);
+        if (responseText == 0) {
+            $("#notify_warning").html("You already subscribe to our newsletter.");
+            $("#notify_warning").notify();
+            setTimeout(function () {
+                $('#notify_warning').fadeOut('slow');
+            }, 2000);
             return false;
         } else {
+            $("#notify_success").html("Thank you for subscribe to our newsletter.");
             $("#notify_success").notify();
+            setTimeout(function () {
+                $('#notify_success').fadeOut('slow');
+            }, 2000);
         }
     }
 

@@ -39,7 +39,7 @@ $XReview = array(30);
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form role="form" id="email_template_form" name="email_template_form" method="POST" action="<?php echo site_url(); ?>/email_template_cont/update_email_template">
+                            <form role="form" id="email_template_form" name="email_template_form" method="POST" action="<?php echo site_url(); ?>email_template_cont/update_email_template">
 
                                 <input type="hidden" name="mode_addarticle" id="mode_addarticle" value="add_article">
                                 <div class="form-group">
@@ -309,52 +309,52 @@ $XReview = array(30);
 
 <!---------------------------email template validation section------------------------------>
 <script type="text/javascript">
-                                            function email_template_validation()
-                                            {
-                                                var has_error = 0;
-                                                //var editor4=$('#editor4').val();
-                                                var editor4 = tinyMCE.get('tinyeditor').getContent();
+                                    function email_template_validation()
+                                    {
+                                        var has_error = 0;
+                                        //var editor4=$('#editor4').val();
+                                        var editor4 = tinyMCE.get('tinyeditor').getContent();
 
-                                                $('.need').each(function () {
-                                                    element_id = $(this).attr('id');
-                                                    element_value = $(this).val();
-                                                    element_label = $(this).attr('label');
-                                                    error_div = $("#" + element_id + "_error")
-                                                    //alert(element_id);
-                                                    if (element_value.search(/\S/) == -1)
-                                                    {
-                                                        has_error++;
-                                                        error_div.html(element_label + ' is required.');
-                                                    } else
-                                                    {
-                                                        error_div.html('');
-                                                    }
-                                                });
+                                        $('.need').each(function () {
+                                            element_id = $(this).attr('id');
+                                            element_value = $(this).val();
+                                            element_label = $(this).attr('label');
+                                            error_div = $("#" + element_id + "_error")
+                                            //alert(element_id);
+                                            if (element_value.search(/\S/) == -1)
+                                            {
+                                                has_error++;
+                                                error_div.html(element_label + ' is required.');
+                                            } else
+                                            {
+                                                error_div.html('');
+                                            }
+                                        });
 //
 
-                                                if (editor4.search(/\S/) == -1 || editor4 == '')
-                                                {
-                                                    has_error++;
-                                                    document.getElementById('editor4_error').innerHTML = 'Email Template Content is required.';
-                                                } else
-                                                {
-                                                    document.getElementById('editor4_error').innerHTML = '';
-                                                }
-                                                //alert(has_error);
-                                                if (has_error > 0)
-                                                {
-                                                    return false;
-                                                } else
-                                                {
-                                                    $('#overlay_main').show();
-                                                    $('#loading_img').show();
-                                                    document.email_template_form.submit();
-                                                }
-                                            }
+                                        if (editor4.search(/\S/) == -1 || editor4 == '')
+                                        {
+                                            has_error++;
+                                            document.getElementById('editor4_error').innerHTML = 'Email Template Content is required.';
+                                        } else
+                                        {
+                                            document.getElementById('editor4_error').innerHTML = '';
+                                        }
+                                        //alert(has_error);
+                                        if (has_error > 0)
+                                        {
+                                            return false;
+                                        } else
+                                        {
+                                            $('#overlay_main').show();
+                                            $('#loading_img').show();
+                                            document.email_template_form.submit();
+                                        }
+                                    }
 
-                                            function go_reset()
-                                            {
-                                                window.location.href = "<?php echo site_url(); ?>/email_template_cont";
-                                            }
+                                    function go_reset()
+                                    {
+                                        window.location.href = "<?php echo site_url(); ?>/email_template_cont";
+                                    }
 </script>
 <!--------------------------------------email template validation section----------------------------------->
