@@ -156,6 +156,34 @@ class Home_model extends CI_Model {
         return $result;
     }
 
+    public function get_total_count($blog_tag_id = false) {
+        //return $this->db->count_all("blog");
+        $this->db->from('blog');
+        $this->db->where('status', 1);
+        if ($blog_tag_id) {
+            $this->db->like('blog_tag', $blog_tag_id);
+        }
+        $query = $this->db->get();
+        $val = $query->num_rows();
+        return $val;
+    }
+
+    function get_blog_value_pagi($limit, $start, $blog_tag_id=false) {
+        $this->db->from('blog');
+        $this->db->order_by("added_on", "DESC");
+        $this->db->where('status', 1);
+        if ($blog_tag_id) {
+            $this->db->like('blog_tag', $blog_tag_id);
+        }
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        //echo  $this->db->last_query();
+        if ($query->num_rows > 0) {
+            $val = $query->result();
+            return $val;
+        }
+    }
+
 }
 
 ?>

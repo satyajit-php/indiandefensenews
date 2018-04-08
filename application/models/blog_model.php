@@ -40,12 +40,12 @@ class Blog_model extends CI_Model {
 		
 		}
 	}
-	public function get_total_count($blog_tag_id)
+	public function get_total_count($blog_tag_id=false)
 	{
 	  //return $this->db->count_all("blog");
 		$this->db->from('blog');
 		$this->db->where('status',1);
-		if($blog_tag_id != 0)
+		if($blog_tag_id)
 		{
 			$this->db->like('blog_tag', $blog_tag_id);
 		}
@@ -253,6 +253,8 @@ class Blog_model extends CI_Model {
 			return $query->result();
 		}
 	}
+        
+        
 
 /************************* Thumbnail Function - Ends *************************/
 }

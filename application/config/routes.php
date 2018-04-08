@@ -45,9 +45,13 @@ $route['default_controller'] = "home";
 $route['404_override'] = 'site/my404';
 
 $route['home'] = 'home/index';
-$route['review/(:num)'] = 'review/index/$1';
-$route['blog_cont/(:num)'] = 'Blog_cont/index/$1';
+//$route['review/(:num)'] = 'review/index/$1';
+//$route['blog_cont/(:num)'] = 'Blog_cont/index/$1';
 $route['writetous'] = 'contact/index';
+$route['page/(:num)'] = 'home/index/$2'; // www.domain.com/blog/category/1/my-category
+$route['category/(:num)/:any'] = 'home/category/$2'; // www.domain.com/blog/category/1/my-category
+$route['article/:any/(:num)'] = 'home/article/$3'; // www.domain.com/blog/1/my-article
+
 //$route['rating/(:num)'] = 'rating/index/$1';
 
 /* End of file routes.php */

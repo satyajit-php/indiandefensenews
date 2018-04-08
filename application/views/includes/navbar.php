@@ -23,8 +23,8 @@ if (!empty($nav)) {
 <nav class="navbar main-menu">
     <div class="container">
         <div class="navbar-header">
-            <div class="top-social-icons pull-left">
-                <a href="index.html"> <img class="img-responsive" src="http://www.defencenews.in/images/logo.png" alt="Textual"></a>
+            <div class="top-social-icons pull-left">images
+                <a href="index.html"> <img class="img-responsive" src="<?= base_url();?>assets/images/logo.png" alt="Textual"></a>
             </div>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar"
                     aria-expanded="false">

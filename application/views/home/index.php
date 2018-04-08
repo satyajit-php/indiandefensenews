@@ -1,4 +1,6 @@
-<?php $this->load->view('includes/header'); ?>
+<?php
+$this->load->view('includes/header');
+?>
 <body class="home-2 home-5">
     <!-- pre-loader -->
     <div id="st-preloader">
@@ -79,162 +81,90 @@
         </a>
     </div>
     <!-- start main content -->
+    <?php
+//    echo "<pre>";
+//    print_r($blog_data);
+    ?>
     <div class="main-content">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <!-- start post -->
-                    <article class="post">
-                        <div class="post-thumb">
-                            <a href="single-post.html"><img src="<?php echo base_url(); ?>assets/images/blog-1.jpg" alt=""></a>
-                            <a href="" class="post-thumb-overlay text-center">
-                                <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <h2><a href="">Winter Tour at Kasmir, Pakistan </a> <span
-                                        class="pull-right">Sep 16</span></h2>
-                            </div>
-                            <div class="entry-content">
-                                <p>Porem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumeirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam volu vero eos et accusam et
-                                    justo duo dolores et ea rebum. Stet clita kasd gubergreno takimata sanctus est Lorem
-                                    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                    nonumy eirmod tempor invidunt ut labore et domagna aliquyam erat, sed diam voluptua. At
-                                    vero eos et accusam et justo duo ea rebum. Stet clita kasd gubergren, no sea takimata
-                                    sanctus.</p>
-                                <div class="continue-reading text-uppercase">
-                                    <a href="single-post.html" class="more-link text-center">Continue reading</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- end post -->
-                    <!-- start post -->
-                    <article class="post">
-                        <div class="post-thumb">
-                            <a href="single-post.html"><img src="<?php echo base_url(); ?>assets/images/blog-2.jpg" alt=""></a>
+                    <?php
 
-                            <a href="single-post.html" class="post-thumb-overlay text-center">
-                                <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <h2><a href="">Sea Beach Waves Surfing with Martin </a> <span
-                                        class="pull-right">Sep 16</span></h2>
-                            </div>
-                            <div class="entry-content">
-                                <p>Porem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumeirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam volu vero eos et accusam et
-                                    justo duo dolores et ea rebum. Stet clita kasd gubergreno takimata sanctus est Lorem
-                                    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                    nonumy eirmod tempor invidunt ut labore et domagna aliquyam erat, sed diam voluptua. At
-                                    vero eos et accusam et justo duo ea rebum. Stet clita kasd gubergren, no sea takimata
-                                    sanctus.</p>
-                                <div class="continue-reading text-uppercase">
-                                    <a href="single-post.html" class="more-link text-center">Continue reading</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- end post -->
-                    <!-- start post -->
-                    <article class="post">
-                        <div class="post-thumb">
-                            <a href="single-post.html"><img src="<?php echo base_url(); ?>assets/images/blog-3.jpg" alt=""></a>
+                    function seoUrl($string) {
+                        //Lower case everything
+                        $string = strtolower($string);
+                        //Make alphanumeric (removes all other characters)
+                        $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+                        //Clean up multiple dashes or whitespaces
+                        $string = preg_replace("/[\s-]+/", " ", $string);
+                        //Convert whitespaces and underscore to dash
+                        $string = preg_replace("/[\s_]/", "-", $string);
+                        return $string;
+                    }
 
-                            <a href="single-post.html" class="post-thumb-overlay text-center">
-                                <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <h2><a href="">Amazing Journey to South Africa </a> <span
-                                        class="pull-right">Sep 16</span></h2>
-                            </div>
-                            <div class="entry-content">
-                                <p>Porem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumeirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam volu vero eos et accusam et
-                                    justo duo dolores et ea rebum. Stet clita kasd gubergreno takimata sanctus est Lorem
-                                    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                    nonumy eirmod tempor invidunt ut labore et domagna aliquyam erat, sed diam voluptua. At
-                                    vero eos et accusam et justo duo ea rebum. Stet clita kasd gubergren, no sea takimata
-                                    sanctus.</p>
-                                <div class="continue-reading text-uppercase">
-                                    <a href="single-post.html" class="more-link text-center">Continue reading</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- end post -->
-                    <!-- start post -->
-                    <article class="post">
-                        <div class="post-thumb">
-                            <a href="single-post.html"><img src="<?php echo base_url(); ?>assets/images/blog-4.jpg" alt=""></a>
+                    if (!empty($blog_data)) {
+                        foreach ($blog_data as $key => $value) {
+                            ?>
 
-                            <a href="single-post.html" class="post-thumb-overlay text-center">
-                                <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <h2><a href="">The Largest Sea beach in the World</a> <span
-                                        class="pull-right">Sep 16</span></h2>
-                            </div>
-                            <div class="entry-content">
-                                <p>Porem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumeirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam volu vero eos et accusam et
-                                    justo duo dolores et ea rebum. Stet clita kasd gubergreno takimata sanctus est Lorem
-                                    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                    nonumy eirmod tempor invidunt ut labore et domagna aliquyam erat, sed diam voluptua. At
-                                    vero eos et accusam et justo duo ea rebum. Stet clita kasd gubergren, no sea takimata
-                                    sanctus.</p>
-                                <div class="continue-reading text-uppercase">
-                                    <a href="single-post.html" class="more-link text-center">Continue reading</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- end post -->
-                    <!-- start post -->
-                    <article class="post">
-                        <div class="post-thumb">
-                            <a href="single-post.html"><img src="<?php echo base_url(); ?>assets/images/blog-5.jpg" alt=""></a>
+                            <article class="post">
+                                <div class="post-thumb">
+                                    <a href="<?= base_url(); ?><?= isset($value->id) ? $value->id : '0' ?>/<?= isset($value->blog_title) ? $value->blog_title : 'Indian defense news' ?>">
+                                        <?php
+                                        if ($value->media_type == 'I') {
+                                            ?>
+                                            <img src="<?php echo base_url(); ?>admin/uploaded_image/normal/<?= isset($value->images) ? $value->images : ''; ?>" alt="<?= isset($value->meta_title) ? $value->meta_title : ''; ?>">
+                                        <?php } else {
+                                            ?>
+                                            <div class="embed-responsive embed-responsive-16by9">
+                                                <?= isset($value->youtube_url) ? $value->youtube_url : ''; ?>
+                                            </div>
+                                        <?php }
+                                        ?>
 
-                            <a href="single-post.html" class="post-thumb-overlay text-center">
-                                <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <h2><a href="">A Risky Place with Zero Risk</a> <span
-                                        class="pull-right">Sep 16</span></h2>
-                            </div>
-                            <div class="entry-content">
-                                <p>Porem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumeirmod tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam volu vero eos et accusam et
-                                    justo duo dolores et ea rebum. Stet clita kasd gubergreno takimata sanctus est Lorem
-                                    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                    nonumy eirmod tempor invidunt ut labore et domagna aliquyam erat, sed diam voluptua. At
-                                    vero eos et accusam et justo duo ea rebum. Stet clita kasd gubergren, no sea takimata
-                                    sanctus.</p>
-                                <div class="continue-reading text-uppercase">
-                                    <a href="single-post.html" class="more-link text-center">Continue reading</a>
+                                    </a>
+                                    <a href="" class="post-thumb-overlay text-center">
+                                        <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
+                                    </a>
                                 </div>
-                            </div>
-                        </div>
-                    </article>
+                                <div class="post-content">
+                                    <div class="post-header">
+                                        <h2><a href=""><?= isset($value->blog_title) ? $value->blog_title : 'Indian defense news' ?></a> 
+                                            <span class="pull-right"><?= isset($value->added_on) ? date("M d,Y", strtotime($value->added_on)) : '' ?></span></h2>
+                                    </div>
+                                    <div class="entry-content">
+                                        <?php
+                                        $url = isset($value->blog_title) ? seoUrl($value->blog_title) : 'Indian defense news';
+                                        $string = isset($value->details) ? $value->details : 'No Details is available';
+                                        // strip tags to avoid breaking any html
+                                        $string = strip_tags($string);
+                                        if (strlen($string) > 500) {
+
+                                            // truncate string
+                                            $stringCut = substr($string, 0, 500);
+                                            $endPoint = strrpos($stringCut, ' ');
+
+                                            //if the string doesn't contain any space then it will cut without word basis.
+                                            $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                        }
+                                        ?>
+                                        <p><?= isset($string) ? $string : ''; ?></p>
+                                        <div class="continue-reading text-uppercase">
+                                            <a href="<?= base_url('article'); ?><?= '/' . $url . '/' . $value->id ?>" class="more-link text-center">Continue reading</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <?php
+                        }
+                    }
+                    ?>
+
                     <!-- end post -->
                     <!--pagination-->
                     <div class="post-pagination text-center">
-                        <ul class="pagination">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
+                        <?= isset($pagi) ? $pagi : ''; ?>
                     </div>
 
                 </div>
