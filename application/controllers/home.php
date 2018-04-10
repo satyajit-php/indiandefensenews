@@ -1,7 +1,7 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 class Home extends CI_Controller {
 
@@ -149,7 +149,7 @@ class Home extends CI_Controller {
                 $body = $template_html[0]['email_desc'];
 //                print_r($email);
 //                die();
-                $flag = $this->send_mail($email, $subject, $body);
+                $flag = $this->all_function->send_mail($email, $subject, $body);
             }
         }
         echo $flag;

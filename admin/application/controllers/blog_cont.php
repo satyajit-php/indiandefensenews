@@ -1,5 +1,7 @@
 <?php
 
+//error_reporting(E_ALL);
+//    ini_set('display_errors', 1);
 class Blog_cont extends CI_Controller {
 
     // Controller class for site_settings
@@ -11,8 +13,7 @@ class Blog_cont extends CI_Controller {
         $this->load->model('blog_model'); // calls the model
         $this->load->model('blog_tag_model');
         $this->load->model('news_source_model');
-
-        $this->load->library('session');
+        $this->load->model('guest_post_model');   //load email template model
         $this->load->helper('date');
         if ($this->session->userdata('admin_is_logged_in') != true) {
             $this->session->set_userdata('error_msg', 'Please login first.');
@@ -45,10 +46,14 @@ class Blog_cont extends CI_Controller {
 
     //============load view page of add_article================//
     function add_blog() {
+        $id = $this->uri->segment(3);
+        if ($id) {
+            $data['guestpost_arr'] = $guestpost_arr = $this->guest_post_model->get_data('guest_post', $id);
+        }
         $this->load->view('includes/header');
         $this->load->view('includes/top_header');
         $this->load->view('includes/left_panel');
-        $this->load->view('blog_management/add_content');
+        $this->load->view('blog_management/add_content', $data);
         $this->load->view('includes/footer');
     }
 
@@ -78,6 +83,7 @@ class Blog_cont extends CI_Controller {
     //============insert data into article================//	
     function insert_blog_content() {
         if ($this->input->post('mode_blog') == 'insert_blog') {
+
             $blog_source = $this->input->post('blog_source');
             $blog_category = $this->input->post('blog_category');
             $files = $_FILES['attachment_file'];
@@ -159,6 +165,26 @@ class Blog_cont extends CI_Controller {
                     );
                     $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
                     if ($insrt_data == '1') {
+                        if ($this->input->post("guest")) {
+                            $guestId = $this->input->post("guest");
+                            $stat_param['status'] = 'P';
+                            $stat_param['released_on'] = date('Y-m-d');
+
+                            $this->guest_post_model->change_status_to('guest_post', $stat_param, $guestId);
+                            $guestpost_arr = $this->guest_post_model->get_data('guest_post', $guestId);
+                            $email = $guestpost_arr[0]->email;
+                            $name = $guestpost_arr[0]->name;
+                            $template_html = $this->site_settings_model->get_email_template(36);
+                            if (!empty($template_html)) {
+                                $logourl = "<a href='" . base_url() . "'><img class='img-responsive' src='" . LOGO_URL . "' alt='indiandefensenews.org'></a>";
+                                $subject = $template_html[0]['email_title'];
+                                $body = $template_html[0]['email_desc'];
+                                $body = str_replace("[LOGO]", $logourl, $body);
+                                $body = str_replace("[LINK]", base_url(), $body);
+                                $body = str_replace("[RECEIVER]", $name, $body);
+                            }
+                            $flag = $this->all_function->send_mail($email, $subject, $body);
+                        }
                         $this->session->set_userdata('success_msg', 'Blog content inserted successfully');
                         redirect('blog_cont');
                     } else {
@@ -185,6 +211,26 @@ class Blog_cont extends CI_Controller {
                 $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
 
                 if ($insrt_data) {
+                    if ($this->input->post("guest")) {
+                        $guestId = $this->input->post("guest");
+                        $stat_param['status'] = 'P';
+                        $stat_param['released_on'] = date('Y-m-d');
+
+                        $this->guest_post_model->change_status_to('guest_post', $stat_param, $guestId);
+                        $guestpost_arr = $this->guest_post_model->get_data('guest_post', $guestId);
+                        $email = $guestpost_arr[0]->email;
+                        $name = $guestpost_arr[0]->name;
+                        $template_html = $this->site_settings_model->get_email_template(36);
+                        if (!empty($template_html)) {
+                            $logourl = "<a href='" . base_url() . "'><img class='img-responsive' src='" . base_url() . "'assets/images/logo.png' alt='indiandefensenews.org'></a>";
+                            $subject = $template_html[0]['email_title'];
+                            $body = $template_html[0]['email_desc'];
+                            $body = str_replace("[LOGO]", $logourl, $body);
+                            $body = str_replace("[LINK]", base_url(), $body);
+                            $body = str_replace("[RECEIVER]", $name, $body);
+                        }
+                        $flag = $this->all_function->send_mail($email, $subject, $body);
+                    }
                     $this->session->set_userdata('success_msg', 'Blog content add successfully');
                     redirect('blog_cont');
                 } else {

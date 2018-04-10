@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Show all blog content
-                    <a href="<?php echo base_url(); ?>index.php/blog_cont/add_blog" class="btn btn-primary btn-sm" style="float:right; margin-top:-6px;">Add New Blog Content</a>
+                    <a href="<?php echo base_url(); ?>blog_cont/add_blog" class="btn btn-primary btn-sm" style="float:right; margin-top:-6px;">Add New Blog Content</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

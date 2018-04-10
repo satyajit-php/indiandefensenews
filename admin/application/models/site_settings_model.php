@@ -25,6 +25,14 @@ class Site_settings_model extends CI_Model {
         }
     }
 
+    function get_email_template($id = false) {
+        $this->db->from('email_template');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
 }
 
 ?>

@@ -48,3 +48,5 @@ define('PHYSICAL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/admin/');
 define('PHYSICAL_PATH_FRONT', $_SERVER['DOCUMENT_ROOT']);
 define('FRONT_SITE_PATH', 'http://13.127.181.44');
 
+define('PHYSICAL_PATH_FRONT', $_SERVER['DOCUMENT_ROOT']);
+define('LOGO_URL', 'https://image.ibb.co/e2nnZx/Defence_news_Logo_A2_Big_Version_PNG.png');

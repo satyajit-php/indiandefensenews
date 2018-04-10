@@ -19,13 +19,19 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form" data-toggle="validator"  method="POST" action="<?php echo base_url(); ?>index.php/blog_cont/insert_blog_content" enctype="multipart/form-data">
+                            <form role="form" data-toggle="validator"  method="POST" action="<?php echo base_url(); ?>blog_cont/insert_blog_content" enctype="multipart/form-data">
                                 <input type="hidden" id="mode_blog" name="mode_blog" value="insert_blog"/>
-
+                                <?php
+                                if (isset($guestpost_arr)) {
+                                    ?>
+                                 <input type="hidden" name="guest" value="<?= isset($guestpost_arr[0]->id) ? $guestpost_arr[0]->id : ''; ?>"/>
+                                <?php }
+                                ?>
+                               
                                 <input type="hidden" id="get_tag" name="get_tag" value=""/>
                                 <div class="form-group">
                                     <label>Blog Title <span style="color: red;">*</span>:</label>
-                                    <input class="form-control need" id="blog_title" name="blog_title" label="Blog Title" required>
+                                    <input class="form-control need" id="blog_title" name="blog_title" value="<?= isset($guestpost_arr[0]->subject) ? $guestpost_arr[0]->subject : ''; ?>" label="Blog Title" required>
 
                                 </div>
                                 <div class="form-group">
@@ -45,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Added by <span style="color: red;">*</span>:</label>
-                                    <input class="form-control need" id="added_by" name="added_by" value="admin" label="Added by" required>
+                                    <input class="form-control need" id="added_by" name="added_by" value="<?= isset($guestpost_arr[0]->name) ? $guestpost_arr[0]->name : ''; ?>" label="Added by" required>
 
                                 </div>
                                 <div class="row">
@@ -124,7 +130,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Blog Description <span style="color: red;">*</span>:</label>
-                                    <textarea class="ckeditor" cols="80" id="blog_desc" label="Blog Description" name="blog_desc" rows="10" required></textarea>
+                                    <textarea class="ckeditor" cols="80" id="blog_desc" label="Blog Description" name="blog_desc" rows="10" required><?= isset($guestpost_arr[0]->story) ? $guestpost_arr[0]->story : ''; ?></textarea>
                                     <span id="blog_desc_error" style="color: red;"></span>
                                 </div>
                                 <div class="form-group">

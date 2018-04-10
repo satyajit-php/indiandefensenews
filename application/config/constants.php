@@ -45,4 +45,6 @@ define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 
 define('PHYSICAL_PATH_FRONT', $_SERVER['DOCUMENT_ROOT']);
+define('LOGO_URL', 'https://image.ibb.co/e2nnZx/Defence_news_Logo_A2_Big_Version_PNG.png');
+
 
