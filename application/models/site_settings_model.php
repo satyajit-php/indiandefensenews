@@ -50,7 +50,7 @@ class Site_settings_model extends CI_Model {
             $query = $this->db->get();
             $num = $query->num_rows();
             if ($num > 0) {
-                return 0;
+                return 2;
             } else {
                 $data['email'] = $email;
                 $insrt_data = $this->db->insert('newsletter', $data);

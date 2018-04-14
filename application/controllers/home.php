@@ -140,19 +140,21 @@ class Home extends CI_Controller {
 
     function subsciption() {
         $email = $this->input->post('subsciptionmail');
-        $flag = $this->site_settings_model->subscription($email);
-        if ($flag == 1) {
-            $template_html = $this->site_settings_model->get_email_template(37);
+        if ($email!="") {
+            $flag = $this->site_settings_model->subscription($email);
+            if ($flag == 1) {
+                $template_html = $this->site_settings_model->get_email_template(37);
 
-            if (!empty($template_html)) {
-                $subject = $template_html[0]['email_title'];
-                $body = $template_html[0]['email_desc'];
+                if (!empty($template_html)) {
+                    $subject = $template_html[0]['email_title'];
+                    $body = $template_html[0]['email_desc'];
 //                print_r($email);
 //                die();
-                $flag = $this->all_function->send_mail($email, $subject, $body);
+                    $flag = $this->all_function->send_mail($email, $subject, $body);
+                }
             }
+            echo $flag;
         }
-        echo $flag;
     }
 
     function send_mail($email, $subject, $body) {

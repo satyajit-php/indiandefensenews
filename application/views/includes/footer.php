@@ -120,7 +120,12 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/notify.js"></script>
+<!--<script src="<?php echo base_url(); ?>assets/js/contact-form-script.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.js"></script>
+
+
+
 <script type="text/javascript">
     if (self == top) {
         var theBody = document.getElementsByTagName('body')[0]
@@ -135,28 +140,73 @@
             success: showResponse  // post-submit callback 
         };
         $('#subscription').ajaxForm(options);
+        $('#contactForm').ajaxForm(options);
+
+        $("#owl-demo").owlCarousel({
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+            items: <?= isset($slider) ? count($slider) : 0; ?>,
+
+        });
+        setTimeout(function () {
+            initialize();
+        }, 100);
 
     });
 
     function showResponse(responseText, statusText, xhr, $form) {
-        //alert(responseText);
-        if (responseText == 0) {
+        // alert(responseText);
+        if (responseText == 2) {
             $("#notify_warning").html("You already subscribe to our newsletter.");
             $("#notify_warning").notify();
             setTimeout(function () {
                 $('#notify_warning').fadeOut('slow');
             }, 2000);
             return false;
-        } else {
+        } else if (responseText == 1) {
             $("#notify_success").html("Thank you for subscribe to our newsletter.");
             $("#notify_success").notify();
             setTimeout(function () {
                 $('#notify_success').fadeOut('slow');
             }, 2000);
+        } else if (responseText == 3) {
+            $("#notify_success").html("Your post successfully submited.");
+            $("#notify_success").notify();
+            setTimeout(function () {
+                $('#notify_success').fadeOut('slow');
+                location.reload();
+            }, 2000);
+        } else if (responseText == 4) {
+            $("#notify_success").html("Some thing went wrong try again.");
+            $("#notify_success").notify();
+            setTimeout(function () {
+                $('#notify_error').fadeOut('slow');
+            }, 2000);
         }
+    }
+    function initialize() {
+
+        var ac = new google.maps.places.Autocomplete(
+                (document.getElementById('autocompletes')), {
+            types: ['geocode']
+        });
+
+        ac.addListener('place_changed', function () {
+
+            var place = ac.getPlace();
+
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+            $("#location").val(place.geometry.location.lat() + ',' + place.geometry.location.lng());
+
+        });
     }
 
 
 </script>
+<script src="http://maps.google.com/maps/api/js?v=3.30&key=AIzaSyCsUUI8b0nCjil4iSW6CJ4IjCdhSMp8iEM&libraries=places&region=in&language=en"></script>
 </body>
 </html>

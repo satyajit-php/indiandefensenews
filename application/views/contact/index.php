@@ -30,30 +30,45 @@
                                 </p>
                                 <div class="contact-form">
                                     <h3>Send your Query</h3>
-                                    <form class="form-horizontal" role="form" method="post" action="sendemail.php">
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <textarea class="form-control" rows="5" name="message"
-                                                          placeholder="Write your message"></textarea>
-                                            </div>
+                                    <?php
+                                    $attributes = array('class' => 'form-horizontal', 'id' => 'contactForm', 'data-toggle' => 'validator');
+                                    echo form_open('contact/index', $attributes);
+                                    ?>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" id="autocompletes" placeholder="Type your location">
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                       placeholder="Name *">
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                       placeholder="E-mail *">
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control" id="subject" name="subject"
-                                                       placeholder="Subject">
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" id="name" name="writeus[name]" placeholder="Full Name" required data-error="Please enter your name">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" id="email" name="writeus[email]" placeholder="you@yoursite.com" required data-error="Please enter your email">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" id="subject" name="writeus[subject]" placeholder="Subject" required data-error="Please enter your subject">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
 
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <textarea class="form-control" rows="5" name="writeus[message]" placeholder="Write Your story" data-error="Write your message" required></textarea>
+                                            <div class="help-block with-errors"></div>
                                         </div>
-                                        <button type="button" class="btn send-btn">Send your Message</button>
-                                    </form>
+                                    </div>
+                                    <input type="hidden"  id="location" name="writeus[location]">
+                                    <button type="submit" id="submit" class="btn send-btn">Send your Message</button>
+                                    <?php
+                                    echo form_fieldset_close();
+                                    ?>
                                 </div>
                                 <h3 class="ex-contact-info">Additional Contact Info</h3>
                                 <h3>+1 (302) 444.019.1, +1 (302) 222.522.3 (MON–FRI 9AM–6PM)</h3>

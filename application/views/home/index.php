@@ -15,70 +15,46 @@ $this->load->view('includes/header');
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carousel-example-generic" class="carousel slide carousel-fadecarousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <?php
-                            if (!empty($slider)) {
-                                foreach ($slider as $key => $value) {
-                                    $class = "";
-                                    if ($key == 0) {
-                                        $class = "active";
-                                    }
-                                    ?>
-                                    <li data-target="#carousel-example-generic" data-slide-to="<?= isset($key) ? $key : '0' ?>" class="<?= ($class != '') ? $class : '' ?>"></li>
-                                    <?php
+                    <div id="owl-demo">
+                        <?php
+                        if (!empty($slider)) {
+                            foreach ($slider as $key => $value) {
+                                $class = "";
+                                if ($key == 0) {
+                                    $class = "active";
                                 }
-                            }
-                            ?>
-                        </ol>
-                        <div class="carousel-inner">
-                            <?php
-                            if (!empty($slider)) {
-                                foreach ($slider as $key => $value) {
-                                    $class = "";
-                                    if ($key == 0) {
-                                        $class = "active";
-                                    }
-                                    ?>
-                                    <div class="item <?= ($class != '') ? $class : '' ?>">
-                                        <img class="img-responsive" src="<?php echo base_url() . 'admin/uploaded_image/slider_normal/' ?><?= isset($value->images) ? $value->images : '' ?>" alt="<?= isset($value->tagline) ? $value->tagline : 'indiandefencenews'; ?>" style="width:1200px; height:800px;  ">
-                                        <div class="carousel-caption">
-                                            <?= isset($value->tagline) ? $value->tagline : 'Indian defence news'; ?>
-                                        </div>
+                                ?>
+                                <div class="item <?= ($class != '') ? $class : '' ?>">
+                                    <img class="" src="<?php echo base_url() . 'admin/uploaded_image/slider_normal/' ?><?= isset($value->images) ? $value->images : '' ?>" alt="<?= isset($value->tagline) ? $value->tagline : 'indiandefencenews'; ?>" style="">
+                                    <div class="carousel-caption">
+                                        <?= isset($value->tagline) ? $value->tagline : 'Indian defence news'; ?>
                                     </div>
-                                    <?php
-                                }
+                                </div>
+                                <?php
                             }
-                            ?>
-
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span></a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right">
-                            </span>
-                        </a>
+                        }
+                        ?>
                     </div>
-                    <div class="main-text hidden-xs">
-                        <div class="col-md-12 text-center">
-                            <div class="logo text-center">
-                                <h1></h1>
-                                <p>A Content base Handcrafted Bootstrap Theme</p>
-                            </div>
-
-                        </div>
-                    </div>
+                    <!--                    <div class="main-text hidden-xs">
+                                            <div class="col-md-12 text-center">
+                                                <div class="logo text-center">
+                                                    <h1></h1>
+                                                    <p>A Content base Handcrafted Bootstrap Theme</p>
+                                                </div>
+                    
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </div>
 
         <!--Left and right controls -->
-        <a class="left carousel-control" href="#home-carousel" role="button" data-slide="prev">
-            <i class="fa fa-angle-left"></i>
-        </a>
-        <a class="right carousel-control" href="#home-carousel" role="button" data-slide="next">
-            <i class="fa fa-angle-right"></i>
-        </a>
+        <!--        <a class="left carousel-control" href="#home-carousel" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="right carousel-control" href="#home-carousel" role="button" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>-->
     </div>
     <!-- start main content -->
     <?php
