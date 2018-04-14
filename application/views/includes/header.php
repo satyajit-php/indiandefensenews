@@ -44,4 +44,5 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/responsive.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.css" />
+        <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad2004922309d0013d4ebc6&product=social-ab' async='async'></script>
     </head>

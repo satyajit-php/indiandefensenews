@@ -23,11 +23,10 @@ if (!empty($nav)) {
 <nav class="navbar main-menu">
     <div class="container">
         <div class="navbar-header">
-            <div class="top-social-icons pull-left">images
-                <a href="index.html"> <img class="img-responsive" src="<?= base_url();?>assets/images/logo.png" alt="Textual"></a>
+            <div class="top-social-icons pull-left">
+                <a href="<?= base_url(); ?>"> <img class="img-responsive" src="<?= base_url(); ?>assets/images/logo.png" alt="Textual"></a>
             </div>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar"
-                    aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -35,7 +34,7 @@ if (!empty($nav)) {
             </button>
         </div>
 
-        <div id="myNavbar" class="navbar-collapse collapse">
+        <div id="myNavbar" class="pull-right navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
                 <?php
                 if (!empty($parent)) {

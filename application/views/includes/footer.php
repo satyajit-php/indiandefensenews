@@ -79,15 +79,17 @@
                     <div class="copy-text pull-left">
                         <p>Copyright &copy; <?= date('Y'); ?> all rights reserved to <a href="<?= base_url(); ?>">indiandefencenews.org</a></p>
                     </div>
-                    <div class="pull-right social-share footer-social-icon">
-                        <span>Follow Us: </span>
+                    <div class="social-share footer-social-icon" id="outer_div">
+<!--                        <span>Follow Us: </span>
                         <ul class="">
                             <li><a class="s-facebook" href="<?= isset($sitesettings_data[0]['facebook']) ? $sitesettings_data[0]['facebook'] : '' ?>"><i class="fa fa-facebook"></i></a></li>
                             <li><a class="s-twitter" href="<?= isset($sitesettings_data[0]['twitter']) ? $sitesettings_data[0]['twitter'] : '' ?>"><i class="fa fa-twitter"></i></a></li>
                             <li><a class="s-google-plus" href="<?= isset($sitesettings_data[0]['google_plus']) ? $sitesettings_data[0]['google_plus'] : '' ?>"><i class="fa fa-google-plus"></i></a></li>
                             <li><a class="s-instagram" href="<?= isset($sitesettings_data[0]['instagram']) ? $sitesettings_data[0]['instagram'] : '' ?>"><i class="fa fa-instagram"></i></a></li>
                             <li><a class="s-youtube" href="<?= isset($sitesettings_data[0]['youtube']) ? $sitesettings_data[0]['youtube'] : '' ?>"><i class="fa fa-youtube"></i></a></li>
-                        </ul>
+                        </ul>-->
+
+                        <div class="sharethis-inline-follow-buttons"></div>
                     </div>
                 </div>
             </div>
@@ -148,8 +150,9 @@
 
         });
         setTimeout(function () {
+            $("#outer_div").addClass("pull-right");
             initialize();
-        }, 100);
+        }, 1000);
 
     });
 
