@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 
         $this->load->model('site_settings_model'); //loading model
         $this->load->model('home_model'); //loading model
+        $this->load->library('pagination'); //loading session
     }
 
     //============load home page================//
@@ -37,10 +38,26 @@ class Home extends CI_Controller {
         echo $id;
     }
 
-    public function myPagination($total = 0, $per_page = 10, $page = 1, $url = '?') {
+    function article() {
+        $id = $this->uri->segment(3);
+        if ($id) {
+            $data['details'] = $details = $this->home_model->get_blog_value($id);
+//            echo $this->db->last_query();
+//            die();
+            if (!empty($details)) {
+                $this->load->view('home/details', $data);
+            } else {
+                redirect('home');
+            }
+        } else {
+            redirect('home');
+        }
+    }
 
-        $createURL = explode('page/', $_SERVER['REQUEST_URI']);
-        $createURL = $createURL[0] . 'page=';
+    public function myPagination($total = 0, $per_page = 2, $page = 1, $url = '?') {
+
+        $createURL = explode('?page=', $_SERVER['REQUEST_URI']);
+        $createURL = $createURL[0] . '?page=';
         $total = $total;
         $adjacents = "2";
 
@@ -140,7 +157,7 @@ class Home extends CI_Controller {
 
     function subsciption() {
         $email = $this->input->post('subsciptionmail');
-        if ($email!="") {
+        if ($email != "") {
             $flag = $this->site_settings_model->subscription($email);
             if ($flag == 1) {
                 $template_html = $this->site_settings_model->get_email_template(37);
@@ -155,40 +172,6 @@ class Home extends CI_Controller {
             }
             echo $flag;
         }
-    }
-
-    function send_mail($email, $subject, $body) {
-
-        require_once PHYSICAL_PATH_FRONT . '/smtpmail/PHPMailerAutoload.php';
-        $mail = new PHPMailer;
-
-        $mail->SMTPAuth = true; // Enaele SMTP authentication
-        $mail->Username = 'AKIAJ6AJODAGYITYGQBA'; // SMTP username
-        $mail->Password = 'Au+CqTt19E+zv/KhcCxyfaiNO7Mru0BqUssB8pvNgqU4'; // SMTP password
-        $mail->SMTPSecure = 'tls'; // Enable encryption, 'ssl' also accepted
-        $mail->Host = 'email-smtp.us-east-1.amazonaws.com';
-        $mail->Port = 587; //Set the SMTP port number - 587 for authenticated TLS
-        $mail->setFrom('indiandefensenews6@gmail.com', 'indian defence news'); //Set who the message is to be sent from
-        //$mail->addReplyTo('labnol@gmail.com', 'First Last'); //Set an alternative reply-to address
-        //$mail->addAddress('care@creditmonk.com', 'Josh Adams'); // Add a recipient
-
-        $mail->isHTML(true);
-        $mail->FromName = 'Indiandefencenews';
-        $mail->addAddress($email);     // Add a recipient
-        $mail->WordWrap = 50;
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $body;
-        //$mail->send();
-        if (!$mail->send()) {
-            // echo 'Message could not be sent.';
-            // echo 'Mailer Error: ' . $mail->ErrorInfo;
-            $return = 0;
-        } else {
-            // echo 'Message has been sent';
-            $return = 1;
-        }
-        return $return;
     }
 
 }
