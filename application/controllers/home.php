@@ -34,8 +34,31 @@ class Home extends CI_Controller {
         $this->load->view('home/index', $data);
     }
 
-    function category($id = false) {
-        echo $id;
+    function category() {
+        $id = $this->uri->segment(3);
+        if (!$id) {
+            redirect('home');
+        } else {
+            $data['slider'] = $slider = $this->home_model->get_slider();
+
+            $data['totalRow'] = $totalRow = $this->home_model->get_total_count($id);
+            if ($totalRow == 0) {
+                redirect('home');
+            }
+            $perPage = 2;
+            if ($this->input->get('page') == "" || $this->input->get('page') == 0) {
+                $currentPage = 1;
+            } else {
+                $currentPage = $this->input->get('page');
+            }
+            $start = (($currentPage - 1) * $perPage);
+            $limit = $perPage;
+
+            $data["blog_data"] = $this->home_model->get_blog_value_pagi($perPage, $start, $id);
+            $data["links"] = $this->pagination->create_links();
+            $data['pagi'] = $this->myPagination($data['totalRow'], $perPage, $currentPage, $url = '?');
+            $this->load->view('home/index', $data);
+        }
     }
 
     function article() {

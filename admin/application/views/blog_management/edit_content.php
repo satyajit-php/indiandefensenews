@@ -57,14 +57,14 @@
                                     <label>Tag <span style="color: red;">*</span>:</label>
 
                                     <?php
-                                    $all_tag = $this->blog_tag_model->get_all_tag();
+                                    $all_tag = $this->navigation_model->fetch_data();
                                     ?>
                                     <select name="tag_name" class="select2" style="width: 100%;" label="Tag" required>
                                         <option value="">Select Tag</option>
                                         <?php
                                         foreach ($all_tag as $get_all) {
                                             ?>
-                                            <option value="<?php echo $get_all->id; ?>"<?= ($blog_data[0]->blog_category == $get_all->id) ? 'selected' : ''; ?>><?php echo $get_all->tag_name; ?></option>
+                                            <option value="<?php echo $get_all->id; ?>"<?= ($blog_data[0]->blog_tag == $get_all->id) ? 'selected' : ''; ?>><?php echo $get_all->name; ?></option>
 
                                             <?php
                                         }

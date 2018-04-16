@@ -90,7 +90,7 @@
 <script type="text/javascript">
     function change_status_to(stat_param, id)
     {
-        window.location.href = "<?php echo site_url(); ?>/blog_cont/change_status_to/" + stat_param + "/" + id;
+        window.location.href = "<?php echo site_url(); ?>blog_cont/change_status_to/" + stat_param + "/" + id;
     }
 
     function del_data(id)
@@ -98,15 +98,15 @@
         var del = confirm('Are you sure you want to delete this content?');
         if (del == true)
         {
-            window.location.href = "<?php echo site_url(); ?>/blog_cont/del_data/" + id;
+            window.location.href = "<?php echo site_url(); ?>blog_cont/del_data/" + id;
         }
     }
     function update_blog(id)
     {
-        window.location.href = "<?php echo site_url(); ?>/blog_cont/edit_blog/" + id; //Edit Article Redirection Link
+        window.location.href = "<?php echo site_url(); ?>blog_cont/edit_blog/" + id; //Edit Article Redirection Link
     }
     function view_data(id)
     {
-        window.location.href = "<?php echo site_url(); ?>/blog_cont/viewcomm/" + id; //Edit Article Redirection Link
+        window.location.href = "<?php echo site_url(); ?>blog_cont/viewcomm/" + id; //Edit Article Redirection Link
     }
 </script>

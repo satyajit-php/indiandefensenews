@@ -60,14 +60,14 @@
                                             <label>Tag <span style="color: red;">*</span>:</label>
 
                                             <?php
-                                            $all_tag = $this->blog_tag_model->get_all_tag();
+                                            $all_tag = $this->navigation_model->fetch_data();
                                             ?>
-                                            <select name="blog_category" class="select2" id="blog_category" style="width: 100%;" label="Tag" required>
+                                            <select name="blog_tag" class="select2" id="blog_category" style="width: 100%;" label="Tag" required>
                                                 <option value="">Select Tag</option>
                                                 <?php
                                                 foreach ($all_tag as $get_all) {
                                                     ?>
-                                                    <option value="<?php echo $get_all->id; ?>"><?php echo $get_all->tag_name; ?></option>
+                                                    <option value="<?php echo $get_all->id; ?>"><?php echo $get_all->name; ?></option>
 
                                                     <?php
                                                 }

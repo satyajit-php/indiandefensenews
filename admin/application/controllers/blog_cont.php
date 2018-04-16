@@ -11,7 +11,7 @@ class Blog_cont extends CI_Controller {
         $this->load->model('login_model');
         $this->load->model('site_settings_model'); // calls the model
         $this->load->model('blog_model'); // calls the model
-        $this->load->model('blog_tag_model');
+        $this->load->model('navigation_model');
         $this->load->model('news_source_model');
         $this->load->model('guest_post_model');   //load email template model
         $this->load->helper('date');
@@ -85,7 +85,7 @@ class Blog_cont extends CI_Controller {
         if ($this->input->post('mode_blog') == 'insert_blog') {
 
             $blog_source = $this->input->post('blog_source');
-            $blog_category = $this->input->post('blog_category');
+          
             $files = $_FILES['attachment_file'];
 
 
@@ -131,13 +131,12 @@ class Blog_cont extends CI_Controller {
                         //$date = date('Y-m-d H:i:s');
                     }
                     if ($this->input->post('new_tag')) {
-                        $this->load->model('blog_tag_model'); // calls the model
                         $data_to_store = array(
-                            'tag_name' => $this->input->post('new_tag'),
+                            'name' => $this->input->post('new_tag'),
                             'status' => '1'
                         );
-                        $insrt_data = $this->blog_tag_model->insert_blog_value('blog_tag', $data_to_store);
-                        $blog_category = $this->db->insert_id();
+                        $insrt_data = $this->navigation_model->insert_nav_value('navbar', $data_to_store);
+                        $blog_tag = $this->db->insert_id();
                     }
                     if ($this->input->post('new_source')) {
                         $this->load->model('news_source_model'); // calls the model
@@ -153,7 +152,7 @@ class Blog_cont extends CI_Controller {
                         'blog_title' => $this->input->post('blog_title'),
                         'blog_tag' => $this->input->post('get_tag'),
                         'added_by' => $this->input->post('added_by'),
-                        'blog_category' => $blog_category,
+                        'blog_tag' => $blog_tag,
                         'blog_source' => $blog_source,
                         'added_on' => date('Y-m-d'),
                         'images' => $s,
@@ -197,7 +196,7 @@ class Blog_cont extends CI_Controller {
                 $data_to_store['media_type'] = 'Y';
                 $data_to_store = array(
                     'blog_title' => $this->input->post('blog_title'),
-                    'blog_tag' => $this->input->post('get_tag'),
+                    'blog_tag' => $this->input->post('blog_tag'),
                     'added_by' => $this->input->post('added_by'),
                     'added_on' => $date,
                     'images' => $this->input->post('last_img'),
@@ -355,7 +354,7 @@ class Blog_cont extends CI_Controller {
                     $date = date('Y-m-d H:i:s');
                     $data_to_store = array(
                         'blog_title' => $this->input->post('blog_title'),
-                        'blog_tag' => $this->input->post('get_tag'),
+                        'blog_tag' => $this->input->post('tag_name'),
                         'added_by' => $this->input->post('added_by'),
                         'added_on' => $date,
                         'images' => $s,
@@ -380,7 +379,7 @@ class Blog_cont extends CI_Controller {
                 $data_to_store['media_type'] = 'Y';
                 $data_to_store = array(
                     'blog_title' => $this->input->post('blog_title'),
-                    'blog_tag' => $this->input->post('get_tag'),
+                    'blog_tag' => $this->input->post('tag_name'),
                     'added_by' => $this->input->post('added_by'),
                     'added_on' => $date,
                     'images' => $this->input->post('last_img'),

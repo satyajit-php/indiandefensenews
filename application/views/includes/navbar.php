@@ -16,6 +16,19 @@ if (!empty($nav)) {
         }
     }
 }
+
+function seoUrl($string) {
+    //Lower case everything
+    $string = strtolower($string);
+    //Make alphanumeric (removes all other characters)
+    $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+    //Clean up multiple dashes or whitespaces
+    $string = preg_replace("/[\s-]+/", " ", $string);
+    //Convert whitespaces and underscore to dash
+    $string = preg_replace("/[\s_]/", "-", $string);
+    return $string;
+}
+
 //echo "<pre>";
 //print_r($parent);
 ?>
@@ -38,6 +51,7 @@ if (!empty($nav)) {
             <ul class="nav navbar-nav pull-right">
                 <?php
                 if (!empty($parent)) {
+                    $simpleurl = ['home', 'aboutus', 'writetous'];
                     $method = $this->uri->segment(1);
                     if ($method == '') {
                         $method = 'home';
@@ -45,7 +59,22 @@ if (!empty($nav)) {
                     foreach ($parent as $key => $value) {
                         ?>
                         <li class="dropdown  <?= (($method == 'home') && ($value['name'] == 'home')) ? 'active' : ($value['url'] == $method) ? 'active' : '' ?>">
-                            <a href="<?= base_url(); ?><?= isset($value['url']) ? $value['url'] : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false"><?= isset($value['name']) ? $value['name'] : '' ?></a>
+                            <?php
+                            if (in_array($value['url'], $simpleurl)) {
+                                
+                                ?>
+                                <a href="<?= base_url(); ?><?= isset($value['url']) ? $value['url'] : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <?= isset($value['name']) ? $value['name'] : '' ?>
+                                </a>
+                            <?php } else {
+                               
+                                ?>
+                                <a href="<?= base_url() . 'category/'; ?><?= isset($value['url']) ? seoUrl($value['url']) . '/' . $key : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <?= isset($value['name']) ? $value['name'] : '' ?>
+                                </a>
+                            <?php }
+                            ?>
+
                             <?php
                             if (isset($value['child'])) {
                                 ?>
