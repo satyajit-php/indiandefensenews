@@ -110,6 +110,28 @@ class Site_settings_model extends CI_Model {
         return $result->result();
     }
 
+    function google_seo() {
+        $this->db->from('googleplus_seo');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function twiter_seo() {
+        $this->db->from('twiter_seo');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function seo($controller = false) {
+        $this->db->from('seo');
+        $this->db->where('routes', $controller);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
 }
 
 ?>
