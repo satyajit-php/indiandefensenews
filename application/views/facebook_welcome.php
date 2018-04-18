@@ -1,3 +1,0 @@
-<HTML>
-    face book login sucessfull...............
-</html>

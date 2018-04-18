@@ -1,3 +1,10 @@
+if (self == top) {
+    var theBody = document.getElementsByTagName('body')[0]
+    theBody.style.display = "block"
+} else {
+    top.location = self.location
+}
+
 $(document).ready(function () {
     "use strict";
 
@@ -69,6 +76,9 @@ $(document).ready(function () {
         animation: 'fade'
     });
 
+
 });
+
+
 
 

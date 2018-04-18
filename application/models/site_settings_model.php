@@ -89,6 +89,27 @@ class Site_settings_model extends CI_Model {
         return $result;
     }
 
+    function get_blog_value_latest() {
+        $this->db->from('blog');
+        $this->db->order_by("added_on", "DESC");
+        $this->db->where('status', 1);
+        $this->db->limit(3, 0);
+        $query = $this->db->get();
+        //echo  $this->db->last_query();
+        if ($query->num_rows > 0) {
+            $val = $query->result();
+            return $val;
+        }
+    }
+
+    function getcategoryDetails() {
+        //echo ' '.$review_id;
+        $query_val = "SELECT count(blog.id) as total, navbar.name FROM (blog) JOIN navbar ON blog.blog_tag = navbar.id WHERE `blog`.`status` =  '1' group BY  navbar.id";
+        $CI = & get_instance();
+        $result = $CI->db->query($query_val);
+        return $result->result();
+    }
+
 }
 
 ?>

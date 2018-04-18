@@ -48,7 +48,7 @@
                         foreach ($tag_data as $key => $value) {
                             if (!in_array(strtoupper($value['name']), $notshow)) {
                                 ?>
-                                <a href="<?= base_url() . $value['url']; ?>?>"><?= strtoupper($value['name']); ?></a>
+                                <a href="<?= base_url() . isset($value['url']) ? 'category/' . seoUrl($value['url']) . '/' . $value['id'] : ''; ?>"><?= strtoupper($value['name']); ?></a>
                                 <?php
                             }
                         }
@@ -129,12 +129,7 @@
 
 
 <script type="text/javascript">
-    if (self == top) {
-        var theBody = document.getElementsByTagName('body')[0]
-        theBody.style.display = "block"
-    } else {
-        top.location = self.location
-    }
+
     $(document).ready(function () {
         var options = {
             target: '#output1', // target element(s) to be updated with server response 
@@ -155,7 +150,6 @@
         }, 1000);
 
     });
-
     function showResponse(responseText, statusText, xhr, $form) {
         // alert(responseText);
         if (responseText == 2) {
@@ -207,8 +201,6 @@
 
         });
     }
-
-
 </script>
 <script src="http://maps.google.com/maps/api/js?v=3.30&key=AIzaSyCsUUI8b0nCjil4iSW6CJ4IjCdhSMp8iEM&libraries=places&region=in&language=en"></script>
 </body>

@@ -67,7 +67,8 @@ class Home_model extends CI_Model {
             $this->db->select('blog.*,news_source.short_name,blog_tag.tag_name');
             $this->db->from('blog');
             $this->db->join('news_source', 'blog.blog_source = news_source.id');
-             $this->db->join('blog_tag', 'blog.blog_category = blog_tag.id');
+            $this->db->join('blog_tag', 'blog.blog_category = blog_tag.id');
+            $this->db->where('blog.id', $id);
             $query = $this->db->get();
             return $query->result();
         } else {

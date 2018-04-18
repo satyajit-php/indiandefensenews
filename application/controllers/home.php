@@ -19,7 +19,7 @@ class Home extends CI_Controller {
         $data['slider'] = $slider = $this->home_model->get_slider();
 
         $data['totalRow'] = $this->home_model->get_total_count();
-        $perPage = 2;
+        $perPage = 10;
         if ($this->input->get('page') == "" || $this->input->get('page') == 0) {
             $currentPage = 1;
         } else {
@@ -45,7 +45,7 @@ class Home extends CI_Controller {
             if ($totalRow == 0) {
                 redirect('home');
             }
-            $perPage = 2;
+            $perPage = 10;
             if ($this->input->get('page') == "" || $this->input->get('page') == 0) {
                 $currentPage = 1;
             } else {
@@ -65,7 +65,7 @@ class Home extends CI_Controller {
         $id = $this->uri->segment(3);
         if ($id) {
             $data['details'] = $details = $this->home_model->get_blog_value($id);
-//            echo $this->db->last_query();
+            //echo $this->db->last_query();
 //            die();
             if (!empty($details)) {
                 $this->load->view('home/details', $data);

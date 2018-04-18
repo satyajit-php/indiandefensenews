@@ -61,13 +61,11 @@ function seoUrl($string) {
                         <li class="dropdown  <?= (($method == 'home') && ($value['name'] == 'home')) ? 'active' : ($value['url'] == $method) ? 'active' : '' ?>">
                             <?php
                             if (in_array($value['url'], $simpleurl)) {
-                                
                                 ?>
                                 <a href="<?= base_url(); ?><?= isset($value['url']) ? $value['url'] : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?= isset($value['name']) ? $value['name'] : '' ?>
                                 </a>
                             <?php } else {
-                               
                                 ?>
                                 <a href="<?= base_url() . 'category/'; ?><?= isset($value['url']) ? seoUrl($value['url']) . '/' . $key : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?= isset($value['name']) ? $value['name'] : '' ?>
@@ -82,7 +80,11 @@ function seoUrl($string) {
                                     <?php
                                     foreach ($value['child'] as $index => $child) {
                                         ?>  
-                                        <li><a href="<?= base_url() ?><?= isset($child['url']) ? $child['url'] : ''; ?>"><?= isset($child['name']) ? $child['name'] : '' ?> </a></li>
+                                        <li>
+                                            <a href="<?= base_url() . 'category/'; ?><?= isset($child['url']) ? seoUrl($child['url']) . '/' . $child['id'] : ''; ?>" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <?= isset($child['name']) ? $child['name'] : '' ?>
+                                            </a>
+                                        </li>
                                     <?php }
                                     ?>
                                 </ul>

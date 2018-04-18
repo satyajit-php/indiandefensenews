@@ -7,7 +7,7 @@
     </aside><!-- end single widget -->
     <aside class="widget"><!-- start single widget -->
         <div class="social-share">
-           
+
             <div class="sharethis-inline-follow-buttons"></div>
         </div>
     </aside><!-- end single widget -->
@@ -16,6 +16,7 @@
         <p>Subscribe to anewsletter and stay updated with our special offers and the latest free themes
             released.</p>
         <?php
+        $recent = $this->site_settings_model->get_blog_value_latest();
         $attributes = array('class' => '', 'id' => 'subscription', 'data-toggle' => 'validator');
         echo form_open('home/subsciption', $attributes);
         ?>
@@ -28,117 +29,64 @@
     </aside><!-- end single widget -->
     <aside class="widget p-post-widget">
         <h3 class="widget-title text-uppercase">Latest Posts</h3>
+        <?php
+        if (!empty($recent)) {
+            foreach ($recent as $key => $value) {
+                $url = isset($value->blog_title) ? seoUrl($value->blog_title) : 'Indian defense news';
+                ?>
+                <div class="popular-post">
+                    <a class="popular-img" href="<?= base_url('article'); ?><?= isset($value->id) ? '/' . $url . '/' . $value->id : '0'; ?>">
+                        <?php
+                        if ($value->media_type == 'I') {
+                            ?>
+                            <img src="<?php echo base_url(); ?>admin/uploaded_image/normal/<?= isset($value->images) ? $value->images : ''; ?>" alt="<?= isset($value->meta_title) ? $value->meta_title : ''; ?>">
+                        <?php } else {
+                            ?>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <?= isset($value->youtube_url) ? $value->youtube_url : ''; ?>
+                            </div>
+                        <?php }
+                        ?>
+                        <div class="p-overlay"></div>
+                    </a>
+                    <div class="p-content">
+                        <a href="<?= base_url('article'); ?><?= isset($value->id) ? '/' . $url . '/' . $value->id : '0'; ?>"><?= isset($value->blog_title) ? $value->blog_title : 'Indian defense news' ?></a>
+                        <span class="p-date"><?= isset($value->added_on) ? date("M d,Y", strtotime($value->added_on)) : '' ?></span>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+        ?>
 
-        <div class="popular-post">
-            <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/blog-2.jpg" alt="">
-                <div class="p-overlay"></div>
-            </a>
-            <div class="p-content">
-                <a href="#">Amazing Journey to South Africa</a>
-                <span class="p-date">February 15, 2016</span>
-            </div>
-        </div>
-        <div class="popular-post">
-            <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/blog-3.jpg" alt="">
-                <div class="p-overlay"></div>
-            </a>
-            <div class="p-content">
-                <a href="#">A Risky Place with Zero Risk</a>
-                <span class="p-date">February 15, 2016</span>
-            </div>
-        </div>
-        <div class="popular-post">
-            <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/blog-4.jpg" alt="">
-                <div class="p-overlay"></div>
-            </a>
-            <div class="p-content">
-                <a href="#">Home is peaceful Place</a>
-                <span class="p-date">February 15, 2016</span>
-            </div>
-        </div>
     </aside>
-    <aside class="widget"><!-- start single widget -->
-        <h3 class="widget-title text-uppercase">Popular Posts</h3>
-        <div class="thumb-latest-posts">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/pl-post-1.jpg" alt="">
-                        <div class="p-overlay"></div>
-                    </a>
-                </div>
-                <div class="p-content">
-                    <h3><a href="#">An Edge of Ocean</a></h3>
-                    <span class="p-date">February 15, 2017</span>
-                </div>
-            </div>
-        </div>
-        <div class="thumb-latest-posts">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/pl-post-2.jpg" alt="">
-                        <div class="p-overlay"></div>
-                    </a>
-                </div>
-                <div class="p-content">
-                    <h3><a href="#">Beauty Never Ends</a></h3>
-                    <span class="p-date">February 15, 2017</span>
-                </div>
-            </div>
-        </div>
-        <div class="thumb-latest-posts">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/pl-post-3.jpg" alt="">
-                        <div class="p-overlay"></div>
-                    </a>
-                </div>
-                <div class="p-content">
-                    <h3><a href="#">AWSM Standard Post</a></h3>
-                    <span class="p-date">February 15, 2017</span>
-                </div>
-            </div>
-        </div>
-        <div class="thumb-latest-posts">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#" class="popular-img"><img src="<?php echo base_url(); ?>assets/images/pl-post-4.jpg" alt="">
-                        <div class="p-overlay"></div>
-                    </a>
-                </div>
-                <div class="p-content">
-                    <h3><a href="#">Beside of Silent Place</a></h3>
-                    <span class="p-date">February 15, 2017</span>
-                </div>
-            </div>
-        </div>
-    </aside><!-- end single widget -->
+
+    <aside class="widget widget-search">
+        <h3 class="widget-title text-uppercase">Search Widget</h3>
+        <form method="get" id="searchform" action="#">
+            <input type="text" placeholder="Search here..." name="s" id="s">
+            <button type="submit" class="submit-btn">Search</button>
+        </form>
+    </aside>
     <aside class="widget category-post-no"><!-- start single widget -->
         <h3 class="widget-title text-uppercase">Categories</h3>
+        <?php
+        $category = $this->site_settings_model->getcategoryDetails();
+        ?>
         <ul>
-            <li>
-                <a href="">Food &amp; Drinks</a>
-                <span class="post-count pull-right"> 2</span>
-            </li>
-            <li>
-                <a href="">Travel</a>
-                <span class="post-count pull-right"> 4</span>
-            </li>
-            <li>
-                <a href="">Business</a>
-                <span class="post-count pull-right"> 2</span>
-            </li>
-            <li>
-                <a href="">Story</a>
-                <span class="post-count pull-right"> 6</span>
-            </li>
-            <li>
-                <a href="">DIY &amp; Tips</a>
-                <span class="post-count pull-right"> 8</span>
-            </li>
-            <li>
-                <a href="">Lifestyle</a>
-                <span class="post-count pull-right"> 7</span>
-            </li>
+            <?php
+            if (!empty($category)) {
+                foreach ($category as $key => $value) {
+                    ?>
+                    <li>
+                        <a href="javascript:void(0);"><?= isset($value->name) ? strtoupper($value->name) : ''; ?></a>
+                        <span class="post-count pull-right"> <?= isset($value->total) ? $value->total : '0'; ?></span>
+                    </li>
+                    <?php
+                }
+            }
+            ?>
+
         </ul>
     </aside><!-- end single widget -->
     <aside class="widget widget-texty"><!-- start single widget -->
@@ -152,11 +100,5 @@
 
         </ul>
     </aside><!-- end single widget -->
-    <aside class="widget widget-search">
-        <h3 class="widget-title text-uppercase">Search Widget</h3>
-        <form method="get" id="searchform" action="#">
-            <input type="text" placeholder="Search here..." name="s" id="s">
-            <button type="submit" class="submit-btn">Search</button>
-        </form>
-    </aside>
+
 </div>

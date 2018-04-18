@@ -67,16 +67,14 @@ $this->load->view('includes/header');
                 <div class="col-md-8">
                     <!-- start post -->
                     <?php
-
-                  
-
                     if (!empty($blog_data)) {
                         foreach ($blog_data as $key => $value) {
+                            $url = isset($value->blog_title) ? seoUrl($value->blog_title) : 'Indian defense news';
                             ?>
 
                             <article class="post">
                                 <div class="post-thumb">
-                                    <a href="<?= base_url(); ?><?= isset($value->id) ? $value->id : '0' ?>/<?= isset($value->blog_title) ? $value->blog_title : 'Indian defense news' ?>">
+                                    <a href="<?= base_url('article'); ?><?= isset($value->id) ? '/' . $url . '/' . $value->id : '0'; ?>">
                                         <?php
                                         if ($value->media_type == 'I') {
                                             ?>
@@ -90,7 +88,7 @@ $this->load->view('includes/header');
                                         ?>
 
                                     </a>
-                                    <a href="" class="post-thumb-overlay text-center">
+                                    <a href="<?= base_url('article'); ?><?= isset($value->id) ? '/' . $url . '/' . $value->id : '0'; ?>" class="post-thumb-overlay text-center">
                                         <div class="text-uppercase text-center"><i class="fa fa-search"></i></div>
                                     </a>
                                 </div>
@@ -101,7 +99,6 @@ $this->load->view('includes/header');
                                     </div>
                                     <div class="entry-content">
                                         <?php
-                                        $url = isset($value->blog_title) ? seoUrl($value->blog_title) : 'Indian defense news';
                                         $string = isset($value->details) ? $value->details : 'No Details is available';
                                         // strip tags to avoid breaking any html
                                         $string = strip_tags($string);
