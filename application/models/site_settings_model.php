@@ -132,6 +132,20 @@ class Site_settings_model extends CI_Model {
         return $result;
     }
 
+    public function get_blog_value($id = false) {
+        if ($id) {
+            $this->db->select('blog.*,news_source.short_name,blog_tag.tag_name');
+            $this->db->from('blog');
+            $this->db->join('news_source', 'blog.blog_source = news_source.id');
+            $this->db->join('blog_tag', 'blog.blog_category = blog_tag.id');
+            $this->db->where('blog.id', $id);
+            $query = $this->db->get();
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
 }
 
 ?>

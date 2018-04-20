@@ -7,7 +7,8 @@ $controller = $this->uri->segment(1);
 
 switch ($controller) {
     case category:
-
+        $id = $this->uri->segment(2);
+        $seo = $this->site_settings_model->get_blog_value($id);
         break;
     case writetous:
         $seo = $this->site_settings_model->seo($controller);
@@ -18,10 +19,16 @@ switch ($controller) {
     case home:
         $seo = $this->site_settings_model->seo($controller);
         break;
+    case article:
+        $id = $this->uri->segment(3);
+        $seo = $this->site_settings_model->get_blog_value($id);
+        break;
 
     default:
         $seo = $this->site_settings_model->seo('home');
 }
+//echo "<pre>";
+//print_r($seo[0]->blog_title);
 ?>
 <html>
     <head>
@@ -31,7 +38,7 @@ switch ($controller) {
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <meta name="description" content="">
+        <meta name="description" content="<?= isset($seo[0]->details) ? $seo[0]->details : ''; ?> <?= isset($seo[0]->description) ? $seo[0]->description : ''; ?>">
 
 
         <!-- Schema.org markup for Google+ -->
@@ -61,17 +68,17 @@ switch ($controller) {
 
 
         <!-- Open Graph data -->
-        <meta property="og:title" content="Title Here" />
+        <meta property="og:title" content="<?= isset($seo[0]->meta_title) ? $seo[0]->meta_title : ''; ?> <?= isset($seo[0]->title) ? $seo[0]->title : ''; ?>" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="http://www.example.com/" />
-        <meta property="og:image" content="http://example.com/image.jpg" />
-        <meta property="og:description" content="Description Here" />
+        <meta property="og:url" content="<?= isset($seo[0]->url) ? $seo[0]->url : ''; ?><?= isset($seo[0]->blog_url) ? $seo[0]->blog_url : ''; ?>" />
+        <meta property="og:image" content="<?= base_url(); ?>assets/images/logo.png" />
+        <meta property="og:description" content="<?= isset($seo[0]->og_description) ? $seo[0]->og_description : ''; ?><?= isset($seo[0]->meta_description) ? $seo[0]->meta_description : '' ?>" />
         <meta property="og:site_name" content="indiandefensenews.org" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Page Title -->
-        <title>Textual - A Content base Handcrafted Bootstrap Template </title>
+        <title><?= isset($seo[0]->blog_title) ? $seo[0]->blog_title : ''; ?> <?= isset($seo[0]->title) ? $seo[0]->title : '' ?></title>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css">
         <!-- Styles -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
