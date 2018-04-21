@@ -146,6 +146,40 @@ class Site_settings_model extends CI_Model {
         }
     }
 
+    public function disclaimer() {
+        $this->db->from('privacy_policy');
+        $this->db->where('status', "Y");
+        $query = $this->db->get();
+        if ($query->num_rows > 0) {
+            $val = $query->result_array();
+            return $val;
+        }
+    }
+
+    public function get_latestnews() {
+        $final_array = [];
+        $url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=24b0ba7b805c4b5a9a1afe1ece3db201";
+        $result = file_get_contents($url);
+        $news_array = json_decode($result, true);
+        if (!empty($news_array)) {
+            if ($news_array['status'] == 'ok') {
+                $data = $news_array['articles'];
+                if (!empty($data)) {
+                    foreach ($data as $key => $value) {
+                        $temp['source'] = $value['source']['name'];
+                        $temp['title'] = $value['title'];
+                        $temp['url'] = $value['url'];
+                        $temp['urlToImage'] = $value['urlToImage'];
+                        $temp['publishedAt'] = date("M d,Y", strtotime($value['publishedAt']));
+                        $final_array[] = $temp;
+                    }
+                }
+            }
+            return $final_array;
+        }
+        return false;
+    }
+
 }
 
 ?>

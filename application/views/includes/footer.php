@@ -58,19 +58,27 @@
             </div>
             <div class="col-md-4">
                 <aside class="tweet-post">
-                    <h3 class="footer-title text-uppercase">Latest Tweets</h3>
-                    <div class="latest-tweet">
-                        <p>Check our new theme 'Textual - Personal WordPress Blog Theme' on #themeforest #Envato
+                    <h3 class="footer-title text-uppercase">Disclaimer</h3>
+                    <div class="about-content">
+                        <?php
+                        $disclaimer = $this->site_settings_model->disclaimer();
+                        if (!empty($disclaimer)) {
+                            $string = $disclaimer[0]['message'];
+                            // strip tags to avoid breaking any html
+                            $string = strip_tags($string);
+                            if (strlen($string) > 500) {
 
-                        </p>
-                        <a href="">http://t.co/I91Wh7cRh1</a>
-                        <p class="tweet-date"><i class="fa fa-twitter"></i>Tweeted on 02:59 AM Sep 22</p>
-                    </div>
-                    <div class="latest-tweet">
-                        <p>Check our new theme 'Textual - Personal WordPress Blog Theme' on #themeforest #Envato
-                        </p>
-                        <a href="">http://t.co/I91Wh7cRh1</a>
-                        <p class="tweet-date"><i class="fa fa-twitter"></i>Tweeted on 02:59 AM Sep 22</p>
+                                // truncate string
+                                $stringCut = substr($string, 0, 500);
+                                $endPoint = strrpos($stringCut, ' ');
+
+                                //if the string doesn't contain any space then it will cut without word basis.
+                                $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                $string .= '... <a href="' . base_url('aboutus') . '">Read More</a>';
+                            }
+                            echo $string;
+                        }
+                        ?>
                     </div>
                 </aside>
             </div>

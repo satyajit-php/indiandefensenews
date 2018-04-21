@@ -89,16 +89,35 @@
 
         </ul>
     </aside><!-- end single widget -->
-    <aside class="widget widget-texty"><!-- start single widget -->
-        <h3 class="widget-title text-uppercase">Texty@Instagram</h3>
-        <ul>
-            <li><a href=""><img src="<?php echo base_url(); ?>assets/images/instra-1.jpg" alt="">
-                </a></li>
-            <li><a href=""><img src="<?php echo base_url(); ?>assets/images/instra-2.jpg" alt=""></a></li>
-            <li><a href=""><img src="<?php echo base_url(); ?>assets/images/instra-3.jpg" alt=""></a></li>
-            <li><a href=""><img src="<?php echo base_url(); ?>assets/images/instra-4.jpg" alt=""></a></li>
+    <aside class="widget p-post-widget">
+        <h3 class="widget-title text-uppercase">Latest News</h3>
+        <div class="containers">
+            <div class="texts">
+                <?php
+                $content = $this->site_settings_model->get_latestnews();
+                if (!empty($content)) {
+                    foreach ($content as $key => $value) {
+                        ?>
+                        <div class="popular-post">
 
-        </ul>
+                            <a class="popular-img" href="<?= isset($value['url']) ? $value['url'] : ''; ?>">
+                                <img src="<?= isset($value['urlToImage']) ? $value['urlToImage'] : ''; ?>" alt="<?= isset($value['title']) ? $value['title'] : ''; ?>">
+                                <div class="p-overlay"></div>
+                            </a>
+                            <div class="p-content">
+                                <a href="<?= isset($value['url']) ? $value['url'] : ''; ?>"> <?= isset($value['title']) ? $value['title'] : ''; ?></a>
+                                <span class="p-date"><?= isset($value['publishedAt']) ? $value['publishedAt'] : ''; ?></span>
+                                <span class="p-date"><?= isset($value['source']) ? $value['source'] : ''; ?></span>
+                            </div>
+
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
+        </div>
+
     </aside><!-- end single widget -->
 
 </div>
