@@ -1,6 +1,6 @@
 <?php
 
-class Aboutus extends CI_Controller {
+class Contact_page extends CI_Controller {
 
     // Controller class for site_settings
     function __construct() {
@@ -8,7 +8,7 @@ class Aboutus extends CI_Controller {
         $this->load->model('left_panel_model'); // calls the model
         $this->load->model('login_model');
         $this->load->model('site_settings_model'); // calls the model
-        $this->load->model('aboutus_model'); // calls the model
+        $this->load->model('contactpage_model'); // calls the model
         $this->load->library('session');
         $this->load->helper('date');
         if ($this->session->userdata('admin_is_logged_in') != true) {
@@ -33,26 +33,26 @@ class Aboutus extends CI_Controller {
         $this->load->view('includes/header');
         $this->load->view('includes/top_header');
         $this->load->view('includes/left_panel');
-        $data['aboutus_data'] = $this->aboutus_model->get_aboutus_value();
-        $this->load->view('aboutus/index', $data);
+        $data['contactpage_data'] = $this->contactpage_model->get_contactpage_value();
+        $this->load->view('contactpage/index', $data);
         $this->load->view('includes/footer');
     }
 
     //============load view page of edit_article================//
-    function edit_aboutus() {
+    function edit_contactpage() {
         $this->load->view('includes/header');
         $this->load->view('includes/top_header');
         $this->load->view('includes/left_panel');
         //$this->load->view('article/edit_article');
         $id = $this->uri->segment(3);
-        $data['blog_data'] = $this->aboutus_model->sel_data_up($id);
-        $this->load->view('aboutus/edit', $data);
+        $data['contactpage_data'] = $this->contactpage_model->sel_data_up($id);
+        $this->load->view('contactpage/edit', $data);
         $this->load->view('includes/footer');
     }
 
     //============update data into article================//	
-    function update_aboutus() {
-        if ($this->input->post('mode_blog') == 'update') {
+    function update_contactpage() {
+        if ($this->input->post('mode_update') == 'update') {
             $id = $this->input->post('id');
             //print_r($_FILES['attachment_file']);
             if (isset($_FILES['attachment_file']['name']) && !empty($_FILES['attachment_file']['name'])) {
@@ -90,39 +90,39 @@ class Aboutus extends CI_Controller {
                         $thumbHeight = 309;
 
                         //thumbnail($DIR_DOC,$DIR_IMG_THUMB,$thumbWidth,$thumbHeight,$s);			    
-                        $update_image = $this->aboutus_model->thumbnail($fileThumb, $fileNormal, $thumbWidth, $thumbHeight, '');
+                        $update_image = $this->contactpage_model->thumbnail($fileThumb, $fileNormal, $thumbWidth, $thumbHeight, '');
                     }
 
                     $data_to_store = array(
-                        'title' => $this->input->post('title'),
-                        'image' => $s,
                         'text' => $this->input->post('text'),
+                        'image' => $s,
+                        'contact' => $this->input->post('contact'),
                         'status' => $this->input->post('status'),
                     );
-                    $upd_data = $this->aboutus_model->update_blog_value('aboutus', $this->input->post('id'), $data_to_store);
+                    $upd_data = $this->contactpage_model->update_contactpage_value('contact_page', $this->input->post('id'), $data_to_store);
 
                     if ($upd_data) {
-                        $this->session->set_userdata('success_msg', 'About us content updated successfully');
+                        $this->session->set_userdata('success_msg', 'Write us page content updated successfully');
                     } else {
                         $this->session->set_userdata('error_msg', 'Cannot update duplicate data.');
                     }
-                    redirect('aboutus');
+                    redirect('contact_page');
                 }
             } else {
 
                 $data_to_store = array(
-                    'title' => $this->input->post('title'),
                     'text' => $this->input->post('text'),
+                    'contact' => $this->input->post('contact'),
                     'status' => $this->input->post('status'),
                 );
-                $upd_data = $this->aboutus_model->update_blog_value('aboutus', $this->input->post('id'), $data_to_store);
+                $upd_data = $this->contactpage_model->update_contactpage_value('contact_page', $this->input->post('id'), $data_to_store);
 
                 if ($upd_data) {
-                    $this->session->set_userdata('success_msg', 'About us content updated successfully');
+                    $this->session->set_userdata('success_msg', 'Write us page content updated successfully');
                 } else {
                     $this->session->set_userdata('error_msg', 'Cannot update duplicate data.');
                 }
-                redirect('aboutus');
+                redirect('contact_page');
             }
         }
     }

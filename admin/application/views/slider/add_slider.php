@@ -84,7 +84,7 @@
 
     function go_reset()
     {
-        window.location.href = "<?php echo base_url(); ?>index.php/slider_con";
+        window.location.href = "<?php echo base_url(); ?>slider_con";
     }
 
 
@@ -135,8 +135,8 @@
                                 var height = this.height;
                                 var width = this.width;
                                 if (height < 500 || width < 1200) {
-                                    $('#img_error').html("Image size should not less than 1200x800.");
-                                    return false;
+//                                    $('#img_error').html("Image size should not less than 1200x800.");
+//                                    return false;
                                 }
                                 $('#img_error').html(" ");
                                 //						  $('#overlay_main').show();

@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Fields marked with <span style="color: red;">*</span> are mandatory
-                    <a href="<?php echo site_url(); ?>/blog_cont" style="color: white;"><button type="button" class="btn btn-primary btn-sm" style="float: right; margin-top: -5px;">
+                    <a href="<?php echo site_url(); ?>blog_cont" style="color: white;"><button type="button" class="btn btn-primary btn-sm" style="float: right; margin-top: -5px;">
                             Back
                         </button></a>
                 </div>
@@ -95,7 +95,7 @@
                                             <?php
                                             $all_news_source = $this->news_source_model->activelists("news_source");
                                             ?>
-                                            <select name="blog_source" id="blog_source" class="select2" style="width: 100%;" label="Tag" required>
+                                            <select name="blog_source" id="blog_source" class="select2" style="width: 100%;" label="Source" required>
                                                 <option value="">Select Source</option>
                                                 <?php
                                                 foreach ($all_news_source as $get_all) {

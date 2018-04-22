@@ -32,13 +32,34 @@ switch ($controller) {
 ?>
 <html>
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117998689-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-117998689-1');
+        </script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>
+            var OneSignal = window.OneSignal || [];
+            OneSignal.push(function () {
+                OneSignal.init({
+                    appId: "5af69b47-c777-4155-9354-8509a7122d54",
+                });
+            });
+        </script>
+
         <!-- Document Settings -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <meta name="description" content="<?= isset($seo[0]->details) ? $seo[0]->details : ''; ?> <?= isset($seo[0]->description) ? $seo[0]->description : ''; ?>">
+        <meta name="description" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?> <?= isset($seo[0]->description) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->description)) : ''; ?>">
 
 
         <!-- Schema.org markup for Google+ -->
@@ -70,7 +91,7 @@ switch ($controller) {
         <!-- Open Graph data -->
         <meta property="og:title" content="<?= isset($seo[0]->meta_title) ? $seo[0]->meta_title : ''; ?> <?= isset($seo[0]->title) ? $seo[0]->title : ''; ?>" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="<?= isset($seo[0]->url) ? $seo[0]->url : ''; ?><?= isset($seo[0]->blog_url) ? $seo[0]->blog_url : ''; ?>" />
+        <meta property="og:url" content="<?= current_url(); ?>" />
         <meta property="og:image" content="<?= base_url(); ?>assets/images/logo.png" />
         <meta property="og:description" content="<?= isset($seo[0]->og_description) ? $seo[0]->og_description : ''; ?><?= isset($seo[0]->meta_description) ? $seo[0]->meta_description : '' ?>" />
         <meta property="og:site_name" content="indiandefensenews.org" />

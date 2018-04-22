@@ -5,7 +5,7 @@
         <div class="st-preloader-circle"></div>
     </div>
     <!-- start main menu -->
-    <?php $this->load->view('includes/navbar'); ?>
+    <?php $this->load->view('includes/navbar');?>
     <!-- start main content -->
     <!-- start main content -->
     <div class="main-content">
@@ -15,7 +15,7 @@
                     <!-- start post -->
                     <article class="post single-post about-me contact">
                         <div class="post-thumb">
-                            <img src="<?php echo base_url(); ?>assets/images/contact-img.jpg" alt="">
+                            <img src="<?php echo base_url(); ?>admin/uploaded_image/normal/<?= isset($htmlcontent[0]->image) ? $htmlcontent[0]->image : ''; ?>" alt="indiandefensenews">
 
                         </div>
                         <div class="post-content">
@@ -23,13 +23,10 @@
                                 <h2>Get In Touch</h2>
                             </div>
                             <div class="entry-content">
-                                <p>I’m Available Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                    nonumeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu vero
-                                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergreno takimata
-                                    sanctus est Lorem ipsum dolor sit ame
+                                <p><?= isset($htmlcontent[0]->text) ? $htmlcontent[0]->text : ''; ?>
                                 </p>
                                 <div class="contact-form">
-                                    <h3>Send your Query</h3>
+                                    <h3>Send your article </h3>
                                     <?php
                                     $attributes = array('class' => 'form-horizontal', 'id' => 'contactForm', 'data-toggle' => 'validator');
                                     echo form_open('contact/index', $attributes);
@@ -70,9 +67,8 @@
                                     echo form_fieldset_close();
                                     ?>
                                 </div>
-                                <h3 class="ex-contact-info">Additional Contact Info</h3>
-                                <h3>+1 (302) 444.019.1, +1 (302) 222.522.3 (MON–FRI 9AM–6PM)</h3>
-                                <a href="mailto:hello@texty.com">hello@texty.com</a>
+                                <?= isset($htmlcontent[0]->contact) ? $htmlcontent[0]->contact : ''; ?>
+
                             </div>
                         </div>
                     </article>

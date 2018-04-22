@@ -65,7 +65,7 @@ class Home extends CI_Controller {
         $id = $this->uri->segment(3);
         if ($id) {
             $data['details'] = $details = $this->home_model->get_blog_value($id);
-            //echo $this->db->last_query();
+//            echo $this->db->last_query();
 //            die();
             if (!empty($details)) {
                 $this->load->view('home/details', $data);

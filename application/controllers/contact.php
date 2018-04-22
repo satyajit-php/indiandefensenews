@@ -13,6 +13,7 @@ class Contact extends CI_Controller {
 
     //============load home page================//
     function index() {
+        $data['htmlcontent'] = $htmlcontent = $this->guest_post_model->contactpage_html();
         if ($this->input->post('writeus')) {
             $writeus = $this->input->post('writeus');
             $writeus['story'] = $writeus['message'];
@@ -39,7 +40,7 @@ class Contact extends CI_Controller {
             }
             echo $flag;
         } else {
-            $this->load->view('contact/index');
+            $this->load->view('contact/index', $data);
         }
     }
 

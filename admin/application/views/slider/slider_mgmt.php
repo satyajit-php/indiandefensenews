@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Show all blog content
-                    <a href="<?php echo base_url(); ?>index.php/slider_con/add_slider" class="btn btn-primary btn-sm" style="float:right; margin-top:-6px;">Add New Slider Image</a>
+                    <a href="<?php echo base_url(); ?>slider_con/add_slider" class="btn btn-primary btn-sm" style="float:right; margin-top:-6px;">Add New Slider Image</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -83,7 +83,7 @@
 <script type="text/javascript">
     function change_status_to(stat_param, id)
     {
-        window.location.href = "<?php echo site_url(); ?>/slider_con/change_status_to/" + stat_param + "/" + id;
+        window.location.href = "<?php echo site_url(); ?>slider_con/change_status_to/" + stat_param + "/" + id;
     }
 
     function del_data(id)
@@ -91,11 +91,11 @@
         var del = confirm('Are you sure you want to delete this content?');
         if (del == true)
         {
-            window.location.href = "<?php echo site_url(); ?>/slider_con/del_data/" + id;
+            window.location.href = "<?php echo site_url(); ?>slider_con/del_data/" + id;
         }
     }
     function update_blog(id)
     {
-        window.location.href = "<?php echo site_url(); ?>/slider_con/edit_data/" + id; //Edit Article Redirection Link
+        window.location.href = "<?php echo site_url(); ?>slider_con/edit_data/" + id; //Edit Article Redirection Link
     }
 </script>

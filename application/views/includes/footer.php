@@ -12,10 +12,10 @@
                             $string = $aboutus[0]['text'];
                             // strip tags to avoid breaking any html
                             $string = strip_tags($string);
-                            if (strlen($string) > 500) {
+                            if (strlen($string) > 300) {
 
                                 // truncate string
-                                $stringCut = substr($string, 0, 500);
+                                $stringCut = substr($string, 0, 300);
                                 $endPoint = strrpos($stringCut, ' ');
 
                                 //if the string doesn't contain any space then it will cut without word basis.
@@ -66,15 +66,15 @@
                             $string = $disclaimer[0]['message'];
                             // strip tags to avoid breaking any html
                             $string = strip_tags($string);
-                            if (strlen($string) > 500) {
+                            if (strlen($string) > 300) {
 
                                 // truncate string
-                                $stringCut = substr($string, 0, 500);
+                                $stringCut = substr($string, 0, 300);
                                 $endPoint = strrpos($stringCut, ' ');
 
                                 //if the string doesn't contain any space then it will cut without word basis.
                                 $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                $string .= '... <a href="' . base_url('aboutus') . '">Read More</a>';
+                                $string .= '... <a href="javascript:void(0);" class="show_dis">Read More</a>';
                             }
                             echo $string;
                         }
@@ -121,6 +121,28 @@
 
 
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">DISCLAIMER</h4>
+                </div>
+                <div class="modal-body">
+                    <p><b><?php
+                        $disclaimer = $this->site_settings_model->disclaimer();
+                        if (!empty($disclaimer)) {
+                            echo $string = $disclaimer[0]['message'];
+                        }
+                        ?></b></p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 </footer>
 <!-- end footer area -->
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
@@ -139,6 +161,9 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+        $(".show_dis").click(function () {
+            $("#myModal").modal('show');
+        });
         var options = {
             target: '#output1', // target element(s) to be updated with server response 
             //beforeSubmit: showRequest, // pre-submit callback 
@@ -149,7 +174,7 @@
 
         $("#owl-demo").owlCarousel({
             autoPlay: 3000, //Set AutoPlay to 3 seconds
-            items: <?= isset($slider) ? count($slider) : 0; ?>,
+            items: 3,
 
         });
         setTimeout(function () {
@@ -181,8 +206,8 @@
                 location.reload();
             }, 2000);
         } else if (responseText == 4) {
-            $("#notify_success").html("Some thing went wrong try again.");
-            $("#notify_success").notify();
+            $("#notify_error").html("Some thing went wrong try again.");
+            $("#notify_error").notify();
             setTimeout(function () {
                 $('#notify_error').fadeOut('slow');
             }, 2000);

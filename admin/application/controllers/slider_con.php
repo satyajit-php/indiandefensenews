@@ -206,10 +206,10 @@ class Slider_con extends CI_Controller {
             } else {
 
                 $data_to_store = array(
-                    'images' => $s,
+                    'tagline' => $this->input->post('tagline'),
                     'status' => $this->input->post('status')
                 );
-                $upd_data = $this->slider_model->update_blog_value('blog', $this->input->post('id'), $data_to_store);
+                $upd_data = $this->slider_model->update_blog_value('slider', $this->input->post('id'), $data_to_store);
 
                 if ($upd_data) {
                     $this->session->set_userdata('success_msg', 'Slider image inserted successfully');

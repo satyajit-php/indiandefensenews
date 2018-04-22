@@ -32,7 +32,7 @@ class guest_post_model extends CI_Model {
         $this->db->where("id", $id);
         $query = $this->db->get();
         $result = $query->result();
-      return $result;
+        return $result;
     }
 
     //=============changin the status of news letter============//
@@ -76,6 +76,17 @@ class guest_post_model extends CI_Model {
         $query = $this->db->get();
         $result = $query->result();
         return $result;
+    }
+
+    public function contactpage_html() {
+        $this->db->from('contact_page');
+        $this->db->where('status', 'Y');
+        $this->db->order_by("id", "DESC");
+        $query = $this->db->get();
+        if ($query->num_rows > 0) {
+            $val = $query->result();
+            return $val;
+        }
     }
 
     //=========send mail to subscribers============//	

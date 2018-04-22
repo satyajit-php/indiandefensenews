@@ -64,10 +64,10 @@ class Home_model extends CI_Model {
     //====get all blogs randomely========//
     public function get_blog_value($id = false) {
         if ($id) {
-            $this->db->select('blog.*,news_source.short_name,blog_tag.tag_name');
+            $this->db->select('blog.*,news_source.short_name,navbar.*');
             $this->db->from('blog');
             $this->db->join('news_source', 'blog.blog_source = news_source.id');
-            $this->db->join('blog_tag', 'blog.blog_category = blog_tag.id');
+            $this->db->join('navbar', 'blog.blog_tag = navbar.id');
             $this->db->where('blog.id', $id);
             $query = $this->db->get();
             return $query->result();
@@ -112,7 +112,7 @@ class Home_model extends CI_Model {
 
     function get_blog_value_pagi($limit, $start, $blog_tag_id = false) {
         $this->db->from('blog');
-        $this->db->order_by("added_on", "DESC");
+        $this->db->order_by("id", "DESC");
         $this->db->where('status', 1);
         if ($blog_tag_id) {
             $this->db->like('blog_tag', $blog_tag_id);

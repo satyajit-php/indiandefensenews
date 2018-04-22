@@ -46,12 +46,12 @@
                                 </p>
                             </div>
                             <div class="post-tag">
-                                <a href="javascript:void(0)"><?= isset($details[0]->tag_name) ? $details[0]->tag_name : ''; ?></a>
+                                <a href="javascript:void(0)"><?= isset($details[0]->name) ? $details[0]->name : ''; ?></a>
                             </div>
                             <div class="single-post-meta">
                                 <ul class="meta-profile pull-left">
                                     <li><a href=""><i class="fa fa-user"></i><?= isset($details[0]->added_by) ? "BY:" . $details[0]->added_by : '' ?></a></li>
-                                    <li><a href=""><i class="fa fa-folder-open"></i><?= isset($details[0]->tag_name) ? $details[0]->tag_name : ''; ?></a></li>
+                                    <li><a href=""><i class="fa fa-folder-open"></i><?= isset($details[0]->name) ? $details[0]->name : ''; ?></a></li>
                                 </ul>
                                 <!--                                <ul class="meta-social pull-right">
                                                                     <li class="s-facebook"><a href=""><i class="fa fa-facebook"></i></a></li>

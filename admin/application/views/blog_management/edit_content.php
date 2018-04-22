@@ -12,7 +12,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Fields marked with <span style="color: red;">*</span> are mandatory
-                    <a href="<?php echo site_url(); ?>/blog_cont" style="color: white;">
+                    <a href="<?php echo site_url(); ?>blog_cont" style="color: white;">
                         <button type="button" class="btn btn-primary btn-sm" style="float: right; margin-top: -5px;">
                             Back
                         </button>
@@ -59,7 +59,7 @@
                                     <?php
                                     $all_tag = $this->navigation_model->fetch_data();
                                     ?>
-                                    <select name="tag_name" class="select2" style="width: 100%;" label="Tag" required>
+                                    <select name="blog_tag" class="select2" style="width: 100%;" label="Tag" required>
                                         <option value="">Select Tag</option>
                                         <?php
                                         foreach ($all_tag as $get_all) {
