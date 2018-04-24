@@ -128,7 +128,7 @@ class Site_settings_model extends CI_Model {
         $this->db->from('seo');
         $this->db->where('routes', $controller);
         $query = $this->db->get();
-        $result = $query->result_array();
+        $result = $query->result();
         return $result;
     }
 

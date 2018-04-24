@@ -12,8 +12,8 @@ class all_function {
         $mail = new PHPMailer;
 
         $mail->SMTPAuth = true; // Enaele SMTP authentication
-        $mail->Username = 'AKIAJ6AJODAGYITYGQBA'; // SMTP username
-        $mail->Password = 'Au+CqTt19E+zv/KhcCxyfaiNO7Mru0BqUssB8pvNgqU4'; // SMTP password
+        $mail->Username = 'AKIAI34IEADUOJKQNDMQ'; // SMTP username
+        $mail->Password = 'Aqw2mEsLrWvrJUvC1bhb6y4IohwMTMsFTlDOc6GDySin'; // SMTP password
         $mail->SMTPSecure = 'tls'; // Enable encryption, 'ssl' also accepted
         $mail->Host = 'email-smtp.us-east-1.amazonaws.com';
         $mail->Port = 587; //Set the SMTP port number - 587 for authenticated TLS
