@@ -8,6 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favicon-32x32.png" type="image/x-icon">
+        <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favicon-16x16.png" sizes="16x16" />
 
         <title>Admin</title>
 

@@ -64,9 +64,9 @@
                                     </label>
                                 </div>
                                 <div class="checkbox" style="top: -25px;left: 200px;margin-bottom: -10px;">
-                                    <label>
+<!--                                    <label>
                                         <a href="<?php echo base_url(); ?>forgot_pass_cont" style="color: #3F3333;">Forgot Password</a>
-                                    </label>
+                                    </label>-->
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <a href="javascript:void(0);" class="btn btn-lg btn-success btn-block" onclick="login_form_validation();">Login</a>

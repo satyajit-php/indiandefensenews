@@ -61,7 +61,10 @@ switch ($controller) {
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta name="description" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?> <?= isset($seo[0]->description) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->description)) : ''; ?>">
 
+        <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favicon-32x32.png" type="image/x-icon">
 
+        <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favicon-16x16.png" sizes="16x16" />
         <!-- Schema.org markup for Google+ -->
         <?php
         if (!empty($google)) {
