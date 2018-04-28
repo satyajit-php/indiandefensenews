@@ -59,6 +59,7 @@ switch ($controller) {
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta name="google-site-verification" content="-SmNg_82W0zFYBb_6Xpz0wiITBYsHL22K_8f_m3OLEo" />
         <meta name="description" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?> <?= isset($seo[0]->description) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->description)) : ''; ?>">
 
         <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favicon-32x32.png" type="image/x-icon">

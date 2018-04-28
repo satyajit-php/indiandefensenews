@@ -132,11 +132,11 @@
                 </div>
                 <div class="modal-body">
                     <p><b><?php
-                        $disclaimer = $this->site_settings_model->disclaimer();
-                        if (!empty($disclaimer)) {
-                            echo $string = $disclaimer[0]['message'];
-                        }
-                        ?></b></p>
+                            $disclaimer = $this->site_settings_model->disclaimer();
+                            if (!empty($disclaimer)) {
+                                echo $string = $disclaimer[0]['message'];
+                            }
+                            ?></b></p>
                 </div>
 
             </div>
@@ -159,6 +159,12 @@
 
 
 <script type="text/javascript">
+    if (self == top) {
+        var theBody = document.getElementsByTagName('body')[0]
+        theBody.style.display = "block"
+    } else {
+        top.location = self.location
+    }
 
     $(document).ready(function () {
         $(".show_dis").click(function () {
