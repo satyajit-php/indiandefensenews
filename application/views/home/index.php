@@ -94,7 +94,7 @@ $this->load->view('includes/header');
                                 </div>
                                 <div class="post-content">
                                     <div class="post-header">
-                                        <h2><a href=""><?= isset($value->blog_title) ? $value->blog_title : 'Indian defense news' ?></a> 
+                                        <h2><a href="<?= base_url('article'); ?><?= isset($value->id) ? '/' . $url . '/' . $value->id : '0'; ?>"><?= isset($value->blog_title) ? $value->blog_title : 'Indian defense news' ?></a> 
                                             <span class="pull-right"><?= isset($value->added_on) ? date("M d,Y", strtotime($value->added_on)) : '' ?></span></h2>
                                     </div>
                                     <div class="entry-content">

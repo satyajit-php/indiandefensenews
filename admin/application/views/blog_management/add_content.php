@@ -19,15 +19,15 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form" data-toggle="validator"  method="POST" action="<?php echo base_url(); ?>blog_cont/insert_blog_content" enctype="multipart/form-data">
+                            <form role="form" data-toggle="validator"  id="blog_frm" method="POST" action="<?php echo base_url(); ?>blog_cont/insert_blog_content" enctype="multipart/form-data">
                                 <input type="hidden" id="mode_blog" name="mode_blog" value="insert_blog"/>
                                 <?php
                                 if (isset($guestpost_arr)) {
                                     ?>
-                                 <input type="hidden" name="guest" value="<?= isset($guestpost_arr[0]->id) ? $guestpost_arr[0]->id : ''; ?>"/>
+                                    <input type="hidden" name="guest" value="<?= isset($guestpost_arr[0]->id) ? $guestpost_arr[0]->id : ''; ?>"/>
                                 <?php }
                                 ?>
-                               
+
                                 <input type="hidden" id="get_tag" name="get_tag" value=""/>
                                 <div class="form-group">
                                     <label>Blog Title <span style="color: red;">*</span>:</label>
@@ -120,12 +120,13 @@
 
                                 <div class="form-group">
                                     <label><span style="color: red;">*</span> Media :</label>
-                                    <input type="file" class="form-control need file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" required>
+                                    <input type="file" class="form-control need file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Youtube Embeded <span style="color: red;">*</span>:</label>
-                                    <input class="form-control need"  name="youtube_url" label="Youtube Frame">
+                                    <textarea class="form-control need"  id="youtube" name="youtube_url" label="Youtube Frame">
+                                    </textarea>
 
                                 </div>
                                 <div class="form-group">
@@ -185,6 +186,12 @@
         window.location.href = "<?php echo base_url(); ?>index.php/blog_cont";
     }
     $(document).ready(function () {
+        $("#blog_frm").submit(function () {
+            youtube = $("#youtube").val();
+            if (youtube != "") {
+                $("#youtube").val(window.btoa(youtube));
+            }
+        })
 
         $(".newtagcover").click(function () {
 

@@ -84,12 +84,8 @@ class Blog_cont extends CI_Controller {
     function insert_blog_content() {
         $data_to_store = [];
         if ($this->input->post('mode_blog') == 'insert_blog') {
-
             $blog_source = $this->input->post('blog_source');
-
             $files = $_FILES['attachment_file'];
-
-
             if (isset($_FILES['attachment_file']['name']) && !empty($_FILES['attachment_file']['name'])) {
                 if ($_FILES["attachment_file"]["name"] != "") {
                     if (preg_match('/video\/*/', $_FILES['attachment_file']['type'])) {
@@ -128,14 +124,12 @@ class Blog_cont extends CI_Controller {
                         $update_image = $this->blog_model->thumbnail($fileThumb, $fileNormal, $thumbWidth, $thumbHeight, '');
                         //$date = date('Y-m-d H:i:s');
                     }
-
                     if ($this->input->post('new_tag') != "") {
-                        $data_to_store = array(
+                        $data_to_store_tag = array(
                             'name' => $this->input->post('new_tag'),
                             'status' => '1'
                         );
-                        $insrt_data = $this->navigation_model->insert_nav_value('navbar', $data_to_store);
-                        unset($data_to_store['name']);
+                        $insrt_data = $this->navigation_model->insert_nav_value('navbar', $data_to_store_tag);
                         $blog_tag = $this->db->insert_id();
                         $data_to_store['blog_tag'] = $blog_tag;
                     } else {
@@ -144,13 +138,12 @@ class Blog_cont extends CI_Controller {
                     if ($this->input->post('new_source') != "") {
                         $this->load->model('news_source_model'); // calls the model
                         $new_source = $this->input->post('new_source');
-                        $data_to_store = array(
+                        $data_to_store_sourse = array(
                             'short_name' => $new_source,
                             'status' => '1'
                         );
-                        $insrt_data = $this->news_source_model->insert_source('news_source', $data_to_store);
+                        $insrt_data = $this->news_source_model->insert_source('news_source', $data_to_store_sourse);
                         $blog_source = $this->db->insert_id();
-                        unset($data_to_store['short_name']);
                         $data_to_store['blog_source'] = $blog_source;
                     } else {
                         $data_to_store['blog_source'] = $this->input->post('blog_source');
@@ -165,18 +158,6 @@ class Blog_cont extends CI_Controller {
                     $data_to_store['meta_description'] = $this->input->post('meta_description');
                     $data_to_store['blog_url'] = $this->input->post('blog_url');
                     $data_to_store['status'] = $this->input->post('status');
-
-//                    $data_to_store = array(
-//                        'blog_title' => $this->input->post('blog_title'),
-//                        'added_by' => $this->input->post('added_by'),
-//                        'added_on' => date('Y-m-d'),
-//                        'images' => $s,
-//                        'details' => $this->input->post('blog_desc'),
-//                        'meta_title' => $this->input->post('meta_title'),
-//                        'meta_description' => $this->input->post('meta_description'),
-//                        'blog_url' => $this->input->post('blog_url'),
-//                        'status' => $this->input->post('status')
-//                    );
                     $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
                     if ($insrt_data == '1') {
                         if ($this->input->post("guest") != "") {
@@ -217,11 +198,38 @@ class Blog_cont extends CI_Controller {
                     'details' => $this->input->post('blog_desc'),
                     'meta_title' => $this->input->post('meta_title'),
                     'meta_description' => $this->input->post('meta_description'),
-                    'youtube_url' => $this->input->post('youtube_url'),
+                    'youtube_url' => base64_decode($this->input->post('youtube_url')),
                     'blog_url' => $this->input->post('blog_url'),
                     'status' => $this->input->post('status')
                 );
+                if ($this->input->post('new_tag') != "") {
+                    $data_to_store_tag = array(
+                        'name' => $this->input->post('new_tag'),
+                        'status' => '1'
+                    );
+                    $insrt_data = $this->navigation_model->insert_nav_value('navbar', $data_to_store_tag);
+                    $blog_tag = $this->db->insert_id();
+                    $data_to_store['blog_tag'] = $blog_tag;
+                } else {
+                    $data_to_store['blog_tag'] = $this->input->post('blog_tag');
+                }
+                if ($this->input->post('new_source') != "") {
+                    $this->load->model('news_source_model'); // calls the model
+                    $new_source = $this->input->post('new_source');
+                    $data_to_store_sources = array(
+                        'short_name' => $new_source,
+                        'status' => '1'
+                    );
+                    $insrt_data = $this->news_source_model->insert_source('news_source', $data_to_store_sources);
+                    $blog_source = $this->db->insert_id();
+                    $data_to_store['blog_source'] = $blog_source;
+                } else {
+                    $data_to_store['blog_source'] = $this->input->post('blog_source');
+                }
                 $data_to_store['media_type'] = 'Y';
+//
+//                print_r($data_to_store);
+//                die();
                 $insrt_data = $this->blog_model->insert_blog_value('blog', $data_to_store);
 
                 if ($insrt_data) {
@@ -379,8 +387,9 @@ class Blog_cont extends CI_Controller {
                         'blog_url' => $this->input->post('blog_url'),
                         'meta_title' => $this->input->post('meta_title'),
                         'meta_description' => $this->input->post('meta_description'),
-                        'youtube_url' => $this->input->post('youtube_url'),
+                        'youtube_url' => base64_decode($this->input->post('youtube_url')),
                     );
+
                     $upd_data = $this->blog_model->update_blog_value('blog', $this->input->post('id'), $data_to_store);
 
                     if ($upd_data) {
@@ -404,9 +413,12 @@ class Blog_cont extends CI_Controller {
                     'blog_url' => $this->input->post('blog_url'),
                     'meta_title' => $this->input->post('meta_title'),
                     'meta_description' => $this->input->post('meta_description'),
-                    'youtube_url' => $this->input->post('youtube_url'),
+                    'youtube_url' => base64_decode($this->input->post('youtube_url')),
                 );
+                //print_r($data_to_store);
+
                 $upd_data = $this->blog_model->update_blog_value('blog', $this->input->post('id'), $data_to_store);
+                //die();
 
                 if ($upd_data) {
                     $this->session->set_userdata('success_msg', 'Blog content updated successfully');

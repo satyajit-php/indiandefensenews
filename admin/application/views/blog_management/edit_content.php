@@ -22,7 +22,7 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form" data-toggle="validator" name="blog_frm" method="POST" action="<?php echo base_url(); ?>index.php/blog_cont/update_blog" enctype="multipart/form-data">
+                            <form role="form" data-toggle="validator" name="blog_frm" id="blog_frm" method="POST" action="<?php echo base_url(); ?>index.php/blog_cont/update_blog" enctype="multipart/form-data">
                                 <input type="hidden" id="get_tag" name="get_tag" value="<?php echo $blog_data[0]->blog_category; ?>"/>
                                 <input type = 'hidden' name='id' value="<?php echo $blog_data[0]->id; ?>"></td>
                                 <input type = 'hidden' name='last_img' value="<?php echo $blog_data[0]->images; ?>"></td>
@@ -101,17 +101,21 @@
 
                                         <?php
                                     } else {
-                                        ?>
-                                        <img alt="Your uploaded image" src="<?php echo base_url() . 'uploaded_image/thumbnail/noimage.jpg'; ?>"  height="100" width="100"/></td>
-                                        <input type="file" class="form-control file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" >
-                                        <?php
+                                        if ($blog_data[0]->youtube_url == "") {
+                                            ?>
+                                            <img alt="Your uploaded image" src="<?php echo base_url() . 'uploaded_image/thumbnail/noimage.jpg'; ?>"  height="100" width="100"/></td>
+                                            <input type="file" class="form-control file" id="featured-img" name="attachment_file" label="Attachment" style= "margin-top: 15px;" >
+                                            <?php
+                                        }
                                     }
                                     ?>
 
                                 </div>
                                 <div class="form-group">
                                     <label>Youtube Embeded <span style="color: red;">*</span>:</label>
-                                    <input class="form-control need"  name="youtube_url" label="Youtube Frame">
+                                    <textarea class="form-control need"  name="youtube_url" label="Youtube Frame" id="youtube">
+                                        <?= isset($blog_data[0]->youtube_url) ? $blog_data[0]->youtube_url : ''; ?>
+                                    </textarea>
 
                                 </div>
                                 <div class="form-group">
@@ -161,7 +165,15 @@
 <script src="<?php echo base_url(); ?>ckeditor/ckeditor.js"></script>
 <!------------validate form------------->
 <script>
+    $(document).ready(function () {
 
+        $("#blog_frm").submit(function () {
+            youtube = $("#youtube").val();
+            if (youtube != "") {
+                $("#youtube").val(window.btoa(youtube));
+            }
+        })
+    })
 
     function go_reset()
     {
