@@ -70,14 +70,20 @@ switch ($controller) {
     <!-- Document Settings -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="google-site-verification" content="-SmNg_82W0zFYBb_6Xpz0wiITBYsHL22K_8f_m3OLEo" />
+    <?php
+    if ($controller == "article") {
+        ?>
+        <meta name="keywords" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?>">
+    <?php } else {
+        ?>
+        <meta name="keywords" content="<?= isset($seo[0]->keyword) ? $seo[0]->keyword : ''; ?>">
+    <?php }
+    ?>
     <meta name="description" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?> <?= isset($seo[0]->description) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->description)) : ''; ?>">
-
     <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favicon-32x32.png" type="image/x-icon">
-
     <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favicon-16x16.png" sizes="16x16" />
     <!-- Schema.org markup for Google+ -->
@@ -86,11 +92,17 @@ switch ($controller) {
         ?>
         <meta itemprop="name" content="<?= isset($google[0]['name']) ? $google[0]['name'] : ''; ?>">
         <meta itemprop="description" content="<?= isset($google[0]['description']) ? $google[0]['description'] : ''; ?>">
-        <meta itemprop="image" content="<?= isset($google[0]['image']) ? $google[0]['image'] : ''; ?>">
-    <?php }
+        <?php
+        if ($controller == "article") {
+            ?>
+            <meta name="image" content="<?= isset($seo[0]->images) ? base_url() . "admin/uploaded_image/normal/" . $seo[0]->images : ''; ?>">
+        <?php } else {
+            ?>
+            <meta name="image" content="<?= isset($google[0]['image']) ? $google[0]['image'] : ''; ?>">
+            <?php
+        }
+    }
     ?>
-
-
     <!-- Twitter Card data -->
     <?php
     if (!empty($twiter)) {
@@ -104,16 +116,22 @@ switch ($controller) {
         <meta name="twitter:image" content="<?= isset($twiter[0]['image_url']) ? $twiter[0]['image_url'] : ''; ?>">
     <?php }
     ?>
-
-
     <!-- Open Graph data -->
     <meta property="og:title" content="<?= isset($seo[0]->meta_title) ? $seo[0]->meta_title : ''; ?> <?= isset($seo[0]->title) ? $seo[0]->title : ''; ?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?= current_url(); ?>" />
-    <meta property="og:image" content="<?= base_url(); ?>assets/images/logo.png" />
+    <?php
+    if ($controller == "article") {
+        ?>
+        <meta property="og:image" content="<?= isset($seo[0]->images) ? base_url() . "admin/uploaded_image/normal/" . $seo[0]->images : ''; ?>">
+    <?php } else {
+        ?>
+        <meta property="og:image" content="<?= isset($google[0]['image']) ? $google[0]['image'] : ''; ?>">
+        <?php
+    }
+    ?>
     <meta property="og:description" content="<?= isset($seo[0]->og_description) ? $seo[0]->og_description : ''; ?><?= isset($seo[0]->meta_description) ? $seo[0]->meta_description : '' ?>" />
     <meta property="og:site_name" content="indiandefensenews.org" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Page Title -->
