@@ -76,10 +76,10 @@ switch ($controller) {
     <?php
     if ($controller == "article") {
         ?>
-        <meta name="keywords" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?>">
+        <!--        <meta name="keywords" content="">-->
     <?php } else {
         ?>
-        <meta name="keywords" content="<?= isset($seo[0]->keyword) ? $seo[0]->keyword : ''; ?>">
+        <!--        <meta name="keywords" content="">-->
     <?php }
     ?>
     <meta name="description" content="<?= isset($seo[0]->details) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->details)) : ''; ?> <?= isset($seo[0]->description) ? preg_replace("/&#?[a-z0-9]+;/i", "", strip_tags($seo[0]->description)) : ''; ?>">

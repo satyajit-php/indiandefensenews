@@ -19,7 +19,7 @@ class Home extends CI_Controller {
         $data['slider'] = $slider = $this->home_model->get_slider();
 
         $data['totalRow'] = $this->home_model->get_total_count();
-        $perPage = 10;
+        $perPage = 20;
         if ($this->input->get('page') == "" || $this->input->get('page') == 0) {
             $currentPage = 1;
         } else {
@@ -45,7 +45,7 @@ class Home extends CI_Controller {
             if ($totalRow == 0) {
                 redirect('home');
             }
-            $perPage = 10;
+            $perPage = 20;
             if ($this->input->get('page') == "" || $this->input->get('page') == 0) {
                 $currentPage = 1;
             } else {
@@ -77,7 +77,7 @@ class Home extends CI_Controller {
         }
     }
 
-    public function myPagination($total = 0, $per_page = 2, $page = 1, $url = '?') {
+    public function myPagination($total = 0, $per_page = 20, $page = 1, $url = '?') {
 
         $createURL = explode('?page=', $_SERVER['REQUEST_URI']);
         $createURL = $createURL[0] . '?page=';
