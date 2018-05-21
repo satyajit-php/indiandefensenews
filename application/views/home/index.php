@@ -77,8 +77,18 @@ $this->load->view('includes/header');
                                     <a href="<?= base_url('article'); ?><?= isset($value->id) ? '/' . $url . '/' . $value->id : '0'; ?>">
                                         <?php
                                         if ($value->media_type == 'I') {
-                                            ?>
-                                            <img src="<?php echo base_url(); ?>admin/uploaded_image/normal/<?= isset($value->images) ? $value->images : ''; ?>" alt="<?= isset($value->meta_title) ? $value->meta_title : ''; ?>">
+											 $imagecache = new ImageCache();
+											   $imagecache->cached_image_directory = '/var/www/html/admin/uploaded_image/cached';
+											   $image_type = exif_imagetype("/var/www/html/admin/uploaded_image/normal/".$value->images);
+												if (!$image_type){
+														$cached_src = base_url().'admin/uploaded_image/normal/'.$value->images;
+													}else
+													{
+														$cached_src = $imagecache->cache( "/var/www/html/admin/uploaded_image/normal/".$value->images);
+													}
+											 ?>
+											<!--<img src="<?php echo base_url(); ?>admin/uploaded_image/normal/<?= isset($value->images) ? $value->images : ''; ?>" alt="<?= isset($value->meta_title) ? $value->meta_title : ''; ?>">  -->
+                                            <img src="<?= ($cached_src!=false) ? $cached_src :  ''; ?>" alt="<?= isset($value->meta_title) ? $value->meta_title : ''; ?>">
                                         <?php } else {
                                             ?>
                                             <div class="embed-responsive embed-responsive-16by9">

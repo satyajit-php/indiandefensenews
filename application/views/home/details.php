@@ -17,10 +17,19 @@
                         <div class="post-thumb">
                             <?php
                             if (!empty($details)) {
-
-                                if ($details[0]->media_type == 'I') {
+								if ($details[0]->media_type == 'I') {
+									$imagecache = new ImageCache();
+									$imagecache->cached_image_directory = '/var/www/html/admin/uploaded_image/cached';
+									$image_type = exif_imagetype("/var/www/html/admin/uploaded_image/normal/".$details[0]->images);
+								if (!$image_type)
+									{
+										$cached_src = base_url().'admin/uploaded_image/normal/'.$details[0]->images;
+									}else
+									{
+										$cached_src = $imagecache->cache( "/var/www/html/admin/uploaded_image/normal/".$details[0]->images);
+									}
                                     ?>
-                                    <img src="<?php echo base_url(); ?>admin/uploaded_image/normal/<?= isset($details[0]->images) ? $details[0]->images : ''; ?>" alt="<?= isset($details[0]->meta_title) ? $details[0]->meta_title : ''; ?>">
+                                    <img src="<?= isset($cached_src) ? $cached_src : ''; ?>" alt="<?= isset($details[0]->meta_title) ? $details[0]->meta_title : ''; ?>">
                                 <?php } else {
                                     ?>
                                     <div class="embed-responsive embed-responsive-16by9">

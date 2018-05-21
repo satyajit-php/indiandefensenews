@@ -3,8 +3,6 @@
 $google = $this->site_settings_model->google_seo();  // google plus seo
 $twiter = $this->site_settings_model->twiter_seo();  // twiter seo
 $controller = $this->uri->segment(1);
-
-
 switch ($controller) {
     case category:
         $id = $this->uri->segment(2);
@@ -27,8 +25,7 @@ switch ($controller) {
     default:
         $seo = $this->site_settings_model->seo('home');
 }
-//echo "<pre>";
-//print_r($seo[0]->blog_title);
+
 ?>
 <html>
     <head>
@@ -73,6 +70,7 @@ switch ($controller) {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="google-site-verification" content="-SmNg_82W0zFYBb_6Xpz0wiITBYsHL22K_8f_m3OLEo" />
+    <meta name="msvalidate.01" content="920B375483CAFBB61B8FB651F76FF15E" />
     <?php
     if ($controller == "article") {
         ?>
@@ -136,12 +134,16 @@ switch ($controller) {
 
     <!-- Page Title -->
     <title><?= isset($seo[0]->blog_title) ? $seo[0]->blog_title : ''; ?> <?= isset($seo[0]->title) ? $seo[0]->title : '' ?></title>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css">
-    <!-- Styles -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/mastercss.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+  
+    <!-- Styles
+	 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/magnific-popup.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/responsive.css">
+	 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.css" />
     <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad2004922309d0013d4ebc6&product=social-ab' async='async'></script>

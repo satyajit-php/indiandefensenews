@@ -55,7 +55,7 @@ $autoload['packages'] = array();
   |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
  */
 
-$autoload['libraries'] = array('database', 'pagination', 'session', 'user_agent', 'form_validation', 'all_function');
+$autoload['libraries'] = array('database', 'pagination', 'session', 'user_agent', 'form_validation', 'all_function','ImageCache');
 
 /*
   | -------------------------------------------------------------------

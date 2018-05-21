@@ -7,6 +7,7 @@ class Blog_cont extends CI_Controller {
     // Controller class for site_settings
     function __construct() {
         parent::__construct();
+		$this->load->library('ImageCache');
         $this->load->model('left_panel_model'); // calls the model
         $this->load->model('login_model');
         $this->load->model('site_settings_model'); // calls the model
@@ -106,14 +107,13 @@ class Blog_cont extends CI_Controller {
                     $arra2 = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
                     $filename = str_replace($arra1, $arra2, $_FILES["attachment_file"]['name']);
-                    $s = time() . "*^*" . $filename;
+                    $s = time() . $filename;
 
                     $fileNormal = $DIR_DOC . $s;
 
                     $file = $_FILES["attachment_file"]['tmp_name'];
                     list($width, $height) = getimagesize($file);
                     $result = move_uploaded_file($file, $fileNormal);
-
                     if ($result == 1 && ($thumb)) {
                         $DIR_IMG_THUMB = PHYSICAL_PATH . "uploaded_image/thumbnail/";
                         $fileThumb = $DIR_IMG_THUMB . $s;

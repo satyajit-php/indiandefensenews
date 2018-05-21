@@ -219,7 +219,15 @@
             }, 2000);
         }
     }
-    function initialize() {
+
+</script>
+<?php
+$controller = $this->uri->segment(1);
+ if ($controller == "writetous") 
+ {
+	?>
+	<script>
+	    function initialize() {
 
         var ac = new google.maps.places.Autocomplete(
                 (document.getElementById('autocompletes')), {
@@ -240,7 +248,10 @@
 
         });
     }
-</script>
-<script src="http://maps.google.com/maps/api/js?v=3.30&key=AIzaSyCsUUI8b0nCjil4iSW6CJ4IjCdhSMp8iEM&libraries=places&region=in&language=en"></script>
+	</script>
+<script src="http://maps.google.com/maps/api/js?v=3.30&key=AIzaSyCsUUI8b0nCjil4iSW6CJ4IjCdhSMp8iEM&libraries=places&region=in&language=en"></script>	 
+ <?php
+ }
+?>
 </body>
 </html>

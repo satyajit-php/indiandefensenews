@@ -12,6 +12,7 @@ class Home extends CI_Controller {
         $this->load->model('site_settings_model'); //loading model
         $this->load->model('home_model'); //loading model
         $this->load->library('pagination'); //loading session
+		$this->load->library('ImageCache');
     }
 
     //============load home page================//
